@@ -59,7 +59,7 @@ export function AboutSection() {
         px: { xs: 3, md: 5, lg: 6 },
       }}
     >
-      {/* Section header — number + dash */}
+      {/* Section header */}
       <Box
         sx={{
           display: "flex",
@@ -75,98 +75,31 @@ export function AboutSection() {
         <Typography sx={{ ...mono, color: "#606060" }}>The Engineer</Typography>
       </Box>
 
-      {/* Massive headline */}
-      <Box sx={{ mb: { xs: 8, md: 12 }, maxWidth: 1200 }}>
-        <Typography
-          sx={{
-            fontFamily: '"Clash Display",sans-serif',
-            fontWeight: 500,
-            fontSize: "clamp(2rem, 5vw, 4.5rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.025em",
-            color: "#F5F5F5",
-          }}
-        >
-          Four years building things people actually use —{" "}
-          <Box component="span" sx={{ color: "#606060" }}>
-            from production video platforms to ML pipelines to billing systems
-            running real cafes.
-          </Box>
-        </Typography>
-      </Box>
-
-      {/* Two-column body — text + photo */}
+      {/* Photo + headline row */}
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1.5fr 1fr" },
-          gap: { xs: 5, md: 8 },
-          mb: { xs: 8, md: 10 },
+          gridTemplateColumns: { xs: "1fr", md: "auto 1fr" },
+          gap: { xs: 4, md: 6 },
           alignItems: "start",
+          mb: { xs: 6, md: 8 },
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          <Box>
-            <Typography sx={{ ...mono, color: "#606060", mb: 2 }}>
-              What I Do
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: '"Satoshi",sans-serif',
-                color: "#A0A0A0",
-                lineHeight: 1.75,
-                fontSize: "1.05rem",
-              }}
-            >
-              Full-stack engineering across React, TypeScript, Spring Boot,
-              FastAPI, and Go. Real-time systems with WebRTC + LiveKit. AI
-              integrations with LangChain and LangSmith. I pick up new stacks
-              fast and ship production code within weeks, not months.
-            </Typography>
-          </Box>
-
-          <Box>
-            <Typography sx={{ ...mono, color: "#606060", mb: 2 }}>
-              Currently
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: '"Satoshi",sans-serif',
-                color: "#A0A0A0",
-                lineHeight: 1.75,
-                fontSize: "1.05rem",
-              }}
-            >
-              Finishing my MSc in Computing at Griffith Dublin while shipping{" "}
-              <Box
-                component="a"
-                href={personal.social.live}
-                target="_blank"
-                rel="noopener"
-                sx={{
-                  color: "#3EFFC2",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(62,255,194,0.4)",
-                  "&:hover": { borderBottomColor: "#3EFFC2" },
-                }}
-              >
-                MeetX
-              </Box>
-              — a real-time video platform with LangChain-powered transcription,
-              AI summaries, and an in-meeting Q&A chatbot.
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Photo card — drop your /public/me.jpg */}
+        {/* Photo — compact card */}
         <Box
           sx={{
+            width: { xs: 180, md: 220 },
+            flexShrink: 0,
             position: "relative",
-            borderRadius: 2,
+            borderRadius: 2.5,
             overflow: "hidden",
             border: "1px solid #1F1F1F",
-            aspectRatio: "4/5",
+            aspectRatio: "3/4",
             background: "linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%)",
+            "&:hover img": {
+              filter: "grayscale(0%)",
+              transform: "scale(1.03)",
+            },
           }}
         >
           <Box
@@ -179,58 +112,119 @@ export function AboutSection() {
               objectFit: "cover",
               transition: "filter 0.4s ease, transform 0.6s ease",
               filter: "grayscale(20%)",
-              "&:hover": { filter: "grayscale(0%)", transform: "scale(1.02)" },
             }}
             onError={(e) => {
               e.target.style.display = "none";
             }}
           />
-
-          {/* Caption overlay */}
+          {/* Bottom gradient overlay with name */}
           <Box
             sx={{
               position: "absolute",
               bottom: 0,
               left: 0,
               right: 0,
-              p: 2.5,
+              p: 2,
               background:
-                "linear-gradient(to top, rgba(13,13,13,0.95) 0%, transparent 100%)",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
+                "linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 100%)",
             }}
           >
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: '"Clash Display",sans-serif',
-                  fontWeight: 600,
-                  color: "#F5F5F5",
-                  fontSize: "1.1rem",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Saim
-              </Typography>
-              <Typography
-                sx={{ ...mono, color: "#606060", fontSize: "0.65rem" }}
-              >
-                Dublin, IE
-              </Typography>
-            </Box>
-            <Box
+            <Typography
               sx={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                background: "#3EFFC2",
-                boxShadow: "0 0 10px #3EFFC2",
-                animation: "pulse-dot 2s ease-in-out infinite",
-                mb: 0.5,
+                fontFamily: '"Clash Display",sans-serif',
+                fontWeight: 600,
+                color: "#F5F5F5",
+                fontSize: "0.95rem",
               }}
-            />
+            >
+              Saim Kaskar
+            </Typography>
+            <Typography sx={{ ...mono, color: "#606060", fontSize: "0.6rem" }}>
+              Dublin, IE
+            </Typography>
           </Box>
+          {/* Status dot */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: 12,
+              right: 12,
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: "#3EFFC2",
+              boxShadow: "0 0 10px #3EFFC2",
+              animation: "pulse-dot 2s ease-in-out infinite",
+            }}
+          />
+        </Box>
+
+        {/* Headline */}
+        <Box>
+          <Typography
+            sx={{
+              fontFamily: '"Clash Display",sans-serif',
+              fontWeight: 500,
+              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+              color: "#F5F5F5",
+              mb: 3,
+            }}
+          >
+            Four years building things people actually use —{" "}
+            <Box component="span" sx={{ color: "#606060" }}>
+              from production video platforms to ML pipelines to billing systems
+              running real cafes.
+            </Box>
+          </Typography>
+
+          {/* Full bio — not split */}
+          <Typography
+            sx={{
+              fontFamily: '"Satoshi",sans-serif',
+              color: "#A0A0A0",
+              lineHeight: 1.8,
+              fontSize: "1rem",
+              mb: 2,
+              maxWidth: 640,
+            }}
+          >
+            Full-stack engineer working across React, TypeScript, Spring Boot,
+            FastAPI, and Go. I build real-time systems with WebRTC and LiveKit,
+            and integrate AI features using LangChain and LangSmith — not as
+            demos, but in production apps handling real users.
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: '"Satoshi",sans-serif',
+              color: "#A0A0A0",
+              lineHeight: 1.8,
+              fontSize: "1rem",
+              maxWidth: 640,
+            }}
+          >
+            Currently finishing my MSc in Computing at Griffith College Dublin
+            while shipping{" "}
+            <Box
+              component="a"
+              href={personal.social.live}
+              target="_blank"
+              rel="noopener"
+              sx={{
+                color: "#3EFFC2",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(62,255,194,0.4)",
+                "&:hover": { borderBottomColor: "#3EFFC2" },
+              }}
+            >
+              MeetX
+            </Box>{" "}
+            — a real-time video platform with LangChain-powered transcription,
+            AI summaries, and an in-meeting Q&A chatbot. I pick up new stacks
+            fast and ship production code within weeks, not months.
+          </Typography>
         </Box>
       </Box>
 

@@ -2,66 +2,55 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-
-const LINES = [
-  { text: "$ initializing portfolio runtime", delay: 50 },
-  { text: "$ loading three.js scene...", delay: 60 },
-  { text: "$ compiling motion timelines...", delay: 50 },
-  { text: "$ establishing neural background...", delay: 60 },
-  { text: "$ mounting react components...", delay: 40 },
-  { text: "$ ready.", delay: 80 },
-];
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
-  fontSize: "0.9rem",
-  letterSpacing: "0.04em",
+  fontSize: { xs: "0.75rem", md: "0.9rem" },
+  letterSpacing: "0.02em",
+  lineHeight: 1.7,
 };
+
+const LINES = [
+  { text: "$ npm run dev", color: "#F5F5F5", delay: 250 },
+  { text: "", color: "#F5F5F5", delay: 100 },
+  { text: "> saim-portfolio@1.0.0 dev", color: "#606060", delay: 80 },
+  { text: "> next dev -p 3035", color: "#606060", delay: 80 },
+  { text: "", color: "#F5F5F5", delay: 100 },
+  { text: "   ▲ Next.js 16.2.6 (Turbopack)", color: "#F5F5F5", delay: 200 },
+  { text: "   - Local:        http://localhost:3035", color: "#A0A0A0", delay: 80 },
+  { text: "   - Network:      http://saimjs.com", color: "#A0A0A0", delay: 80 },
+  { text: "", color: "#F5F5F5", delay: 100 },
+  { text: " ✓ Ready in 412ms", color: "#3EFFC2", delay: 300 },
+  { text: " ✓ Compiled / in 1.2s", color: "#3EFFC2", delay: 200 },
+];
 
 export function BootScreen() {
   const [visible, setVisible] = useState(true);
   const [lineIdx, setLineIdx] = useState(0);
-  const [typed, setTyped] = useState("");
-  const [completed, setCompleted] = useState([]);
-  const [progress, setProgress] = useState(0);
+  const [displayed, setDisplayed] = useState([]);
 
-  // Skip if already seen this session
   useEffect(() => {
     if (typeof window !== "undefined" && sessionStorage.getItem("booted")) {
       setVisible(false);
     }
   }, []);
 
-  // Type out lines one at a time
   useEffect(() => {
     if (!visible || lineIdx >= LINES.length) return;
     const line = LINES[lineIdx];
-    let charIdx = 0;
-
-    const type = () => {
-      if (charIdx <= line.text.length) {
-        setTyped(line.text.slice(0, charIdx));
-        charIdx++;
-        setTimeout(type, line.delay / 2);
-      } else {
-        setCompleted((prev) => [...prev, line.text]);
-        setTyped("");
-        setProgress(((lineIdx + 1) / LINES.length) * 100);
-        setTimeout(() => setLineIdx((i) => i + 1), 150);
-      }
-    };
-    type();
+    const timer = setTimeout(() => {
+      setDisplayed((prev) => [...prev, line]);
+      setLineIdx((i) => i + 1);
+    }, line.delay);
+    return () => clearTimeout(timer);
   }, [lineIdx, visible]);
 
-  // Exit after all lines done
   useEffect(() => {
     if (lineIdx >= LINES.length && visible) {
       const timer = setTimeout(() => {
-        if (typeof window !== "undefined")
-          sessionStorage.setItem("booted", "1");
+        if (typeof window !== "undefined") sessionStorage.setItem("booted", "1");
         setVisible(false);
-      }, 500);
+      }, 700);
       return () => clearTimeout(timer);
     }
   }, [lineIdx, visible]);
@@ -72,135 +61,72 @@ export function BootScreen() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
           style={{
             position: "fixed",
             inset: 0,
-            zIndex: 9999,
+            zIndex: 99999,
             background: "#0A0A0A",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            padding: "24px",
           }}
         >
-          <Box
-            sx={{
-              width: "min(560px, 90vw)",
+          <Box sx={{
+            width: "min(720px, 95vw)",
+            background: "#0F0F0F",
+            border: "1px solid #1F1F1F",
+            borderRadius: 2,
+            overflow: "hidden",
+          }}>
+            {/* Terminal title bar */}
+            <Box sx={{
               display: "flex",
-              flexDirection: "column",
-              gap: 3,
-              px: 3,
-            }}
-          >
-            {/* Header */}
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}>
-              <Box
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: "#3EFFC2",
-                  boxShadow: "0 0 12px #3EFFC2",
-                  animation: "pulse-dot 1s ease-in-out infinite",
-                }}
-              />
-              <Typography
-                sx={{
-                  ...mono,
-                  color: "#3EFFC2",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                  fontSize: "0.7rem",
-                }}
-              >
-                SK.OS · v4.0
-              </Typography>
+              alignItems: "center",
+              gap: 1,
+              px: 2,
+              py: 1.5,
+              borderBottom: "1px solid #1F1F1F",
+              background: "#141414",
+            }}>
+              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#FF5F57" }} />
+              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#FFBD2E" }} />
+              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#28C840" }} />
+              <Box sx={{
+                ml: 2,
+                ...mono,
+                color: "#606060",
+                fontSize: "0.7rem",
+              }}>
+                saim@portfolio: ~/saim-portfolio
+              </Box>
             </Box>
 
-            {/* Completed lines */}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 0.5,
-                minHeight: 180,
-              }}
-            >
-              {completed.map((line, i) => (
-                <Box
-                  key={i}
-                  sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
-                >
-                  <Typography sx={{ ...mono, color: "#606060", flex: 1 }}>
-                    {line}
-                  </Typography>
-                  <Typography
-                    sx={{ ...mono, color: "#3EFFC2", fontSize: "0.75rem" }}
-                  >
-                    [ OK ]
-                  </Typography>
+            {/* Terminal body */}
+            <Box sx={{ p: 3, minHeight: 280 }}>
+              {displayed.map((line, i) => (
+                <Box key={i} sx={{ ...mono, color: line.color, minHeight: "1.4em" }}>
+                  {line.text || "\u00A0"}
                 </Box>
               ))}
 
-              {/* Currently typing */}
+              {/* Blinking cursor */}
               {lineIdx < LINES.length && (
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography sx={{ ...mono, color: "#F5F5F5" }}>
-                    {typed}
-                    <Box
-                      component="span"
-                      sx={{
-                        display: "inline-block",
-                        width: 8,
-                        height: 16,
-                        background: "#3EFFC2",
-                        ml: 0.5,
-                        verticalAlign: "middle",
-                        animation: "blink 0.7s steps(1) infinite",
-                        "@keyframes blink": {
-                          "50%": { opacity: 0 },
-                        },
-                      }}
-                    />
-                  </Typography>
+                <Box sx={{ display: "inline-block" }}>
+                  <Box component="span" sx={{
+                    display: "inline-block",
+                    width: 8,
+                    height: 16,
+                    background: "#3EFFC2",
+                    verticalAlign: "middle",
+                    animation: "blink 0.7s steps(1) infinite",
+                    "@keyframes blink": {
+                      "50%": { opacity: 0 },
+                    },
+                  }} />
                 </Box>
               )}
-            </Box>
-
-            {/* Progress bar */}
-            <Box
-              sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 2 }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography
-                  sx={{ ...mono, color: "#404040", fontSize: "0.7rem" }}
-                >
-                  LOADING
-                </Typography>
-                <Typography
-                  sx={{ ...mono, color: "#3EFFC2", fontSize: "0.7rem" }}
-                >
-                  {Math.round(progress)}%
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 2,
-                  background: "#1F1F1F",
-                  overflow: "hidden",
-                }}
-              >
-                <Box
-                  sx={{
-                    width: `${progress}%`,
-                    height: "100%",
-                    background: "#3EFFC2",
-                    boxShadow: "0 0 8px #3EFFC2",
-                    transition: "width 0.4s ease",
-                  }}
-                />
-              </Box>
             </Box>
           </Box>
         </motion.div>

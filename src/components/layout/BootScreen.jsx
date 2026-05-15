@@ -17,7 +17,11 @@ const LINES = [
   { text: "> next dev -p 3035", color: "#606060", delay: 80 },
   { text: "", color: "#F5F5F5", delay: 100 },
   { text: "   ▲ Next.js 16.2.6 (Turbopack)", color: "#F5F5F5", delay: 200 },
-  { text: "   - Local:        http://localhost:3035", color: "#A0A0A0", delay: 80 },
+  {
+    text: "   - Local:        http://localhost:3035",
+    color: "#A0A0A0",
+    delay: 80,
+  },
   { text: "   - Network:      http://saimjs.com", color: "#A0A0A0", delay: 80 },
   { text: "", color: "#F5F5F5", delay: 100 },
   { text: " ✓ Ready in 412ms", color: "#3EFFC2", delay: 300 },
@@ -48,7 +52,8 @@ export function BootScreen() {
   useEffect(() => {
     if (lineIdx >= LINES.length && visible) {
       const timer = setTimeout(() => {
-        if (typeof window !== "undefined") sessionStorage.setItem("booted", "1");
+        if (typeof window !== "undefined")
+          sessionStorage.setItem("booted", "1");
         setVisible(false);
       }, 700);
       return () => clearTimeout(timer);
@@ -73,32 +78,59 @@ export function BootScreen() {
             padding: "24px",
           }}
         >
-          <Box sx={{
-            width: "min(720px, 95vw)",
-            background: "#0F0F0F",
-            border: "1px solid #1F1F1F",
-            borderRadius: 2,
-            overflow: "hidden",
-          }}>
+          <Box
+            sx={{
+              width: "min(720px, 95vw)",
+              background: "#0F0F0F",
+              border: "1px solid #1F1F1F",
+              borderRadius: 2,
+              overflow: "hidden",
+            }}
+          >
             {/* Terminal title bar */}
-            <Box sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              px: 2,
-              py: 1.5,
-              borderBottom: "1px solid #1F1F1F",
-              background: "#141414",
-            }}>
-              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#FF5F57" }} />
-              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#FFBD2E" }} />
-              <Box sx={{ width: 11, height: 11, borderRadius: "50%", background: "#28C840" }} />
-              <Box sx={{
-                ml: 2,
-                ...mono,
-                color: "#606060",
-                fontSize: "0.7rem",
-              }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                px: 2,
+                py: 1.5,
+                borderBottom: "1px solid #1F1F1F",
+                background: "#141414",
+              }}
+            >
+              <Box
+                sx={{
+                  width: 11,
+                  height: 11,
+                  borderRadius: "50%",
+                  background: "#FF5F57",
+                }}
+              />
+              <Box
+                sx={{
+                  width: 11,
+                  height: 11,
+                  borderRadius: "50%",
+                  background: "#FFBD2E",
+                }}
+              />
+              <Box
+                sx={{
+                  width: 11,
+                  height: 11,
+                  borderRadius: "50%",
+                  background: "#28C840",
+                }}
+              />
+              <Box
+                sx={{
+                  ml: 2,
+                  ...mono,
+                  color: "#606060",
+                  fontSize: "0.7rem",
+                }}
+              >
                 saim@portfolio: ~/saim-portfolio
               </Box>
             </Box>
@@ -106,7 +138,10 @@ export function BootScreen() {
             {/* Terminal body */}
             <Box sx={{ p: 3, minHeight: 280 }}>
               {displayed.map((line, i) => (
-                <Box key={i} sx={{ ...mono, color: line.color, minHeight: "1.4em" }}>
+                <Box
+                  key={i}
+                  sx={{ ...mono, color: line.color, minHeight: "1.4em" }}
+                >
                   {line.text || "\u00A0"}
                 </Box>
               ))}
@@ -114,17 +149,20 @@ export function BootScreen() {
               {/* Blinking cursor */}
               {lineIdx < LINES.length && (
                 <Box sx={{ display: "inline-block" }}>
-                  <Box component="span" sx={{
-                    display: "inline-block",
-                    width: 8,
-                    height: 16,
-                    background: "#3EFFC2",
-                    verticalAlign: "middle",
-                    animation: "blink 0.7s steps(1) infinite",
-                    "@keyframes blink": {
-                      "50%": { opacity: 0 },
-                    },
-                  }} />
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "inline-block",
+                      width: 8,
+                      height: 16,
+                      background: "#3EFFC2",
+                      verticalAlign: "middle",
+                      animation: "blink 0.7s steps(1) infinite",
+                      "@keyframes blink": {
+                        "50%": { opacity: 0 },
+                      },
+                    }}
+                  />
                 </Box>
               )}
             </Box>

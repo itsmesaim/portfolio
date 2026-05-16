@@ -78,8 +78,7 @@ export const techCategories = [
     items: [
       {
         name: "LangChain",
-        // icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/langchain.svg",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       },
       {
         name: "scikit-learn",

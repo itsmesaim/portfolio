@@ -2,13 +2,10 @@
 import Box from "@mui/material/Box";
 import { techCategories } from "@/data/techStack";
 
-// Flatten all unique tech items
 const allTech = techCategories.flatMap((c) => c.items);
 const deduped = allTech.filter(
   (item, idx, self) => idx === self.findIndex((t) => t.name === item.name),
 );
-
-// Double the list for seamless loop
 const doubled = [...deduped, ...deduped];
 
 export function TechMarquee() {
@@ -19,21 +16,21 @@ export function TechMarquee() {
         overflow: "hidden",
         borderTop: "1px solid #1F1F1F",
         borderBottom: "1px solid #1F1F1F",
-        py: 3,
-        mb: { xs: 6, md: 8 },
+        py: 2.5,
+        mb: { xs: 5, md: 7 },
         position: "relative",
         maskImage:
-          "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
         WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          gap: { xs: 5, md: 8 },
+          gap: { xs: 4, md: 6 },
           width: "max-content",
-          animation: "marquee 50s linear infinite",
+          animation: "marquee 60s linear infinite",
           "&:hover": { animationPlayState: "paused" },
         }}
       >
@@ -43,9 +40,9 @@ export function TechMarquee() {
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: 1.5,
+              gap: 1.25,
               flexShrink: 0,
-              opacity: 0.5,
+              opacity: 0.55,
               transition: "opacity 0.3s ease",
               "&:hover": { opacity: 1 },
             }}
@@ -54,22 +51,18 @@ export function TechMarquee() {
               component="img"
               src={tech.icon}
               alt={tech.name}
-              sx={{
-                width: 28,
-                height: 28,
-                objectFit: "contain",
-              }}
+              sx={{ width: 22, height: 22, objectFit: "contain" }}
               onError={(e) => {
                 e.target.style.display = "none";
               }}
             />
             <Box
               sx={{
-                fontFamily: '"Clash Display",sans-serif',
-                fontSize: "1.1rem",
+                fontFamily: '"Geist Mono","Courier New",monospace',
+                fontSize: "0.82rem",
                 fontWeight: 500,
-                color: "#A0A0A0",
-                letterSpacing: "-0.01em",
+                color: "#B8B8B8",
+                letterSpacing: "0.02em",
               }}
             >
               {tech.name}

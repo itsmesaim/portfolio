@@ -1,3 +1,6 @@
+/* Geist Mono from Google Fonts — premium mono with great rendering */
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap");
+
 @font-face {
   font-family: "Clash Display";
   src: url("/fonts/ClashDisplay-Variable.woff2") format("woff2");
@@ -23,12 +26,40 @@
 html {
   scroll-behavior: smooth;
   cursor: none;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: #141414;
+  color: #c8c8c8;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+  font-family:
+    "Satoshi",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* Premium kerning/spacing for headlines */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-feature-settings:
+    "ss01" 1,
+    "ss02" 1,
+    "kern" 1;
+  text-rendering: geometricPrecision;
 }
 
 ::selection {

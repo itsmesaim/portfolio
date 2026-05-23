@@ -1,21 +1,105 @@
 "use client";
+import { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useCursorState } from "@/hooks/useCursorState";
 
-const up = (delay = 0) => ({
-  initial: { opacity: 0, y: 32 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.85, ease: [0.16, 1, 0.3, 1] },
-});
-
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
-  letterSpacing: "0.08em",
+  letterSpacing: "0.1em",
   textTransform: "uppercase",
-  fontSize: "0.7rem",
+  fontSize: "0.72rem",
 };
+
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01!#$%";
+
+// Single letter that scrambles then locks
+function ScrambleLetter({ char, startDelay, isSpace }) {
+  const [display, setDisplay] = useState("█");
+  const [locked, setLocked] = useState(false);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (isSpace) {
+      setDisplay(" ");
+      setLocked(true);
+      return;
+    }
+
+    const startTimer = setTimeout(() => {
+      // Begin scrambling
+      intervalRef.current = setInterval(() => {
+        setDisplay(
+          SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)],
+        );
+      }, 45);
+
+      // Lock to correct char
+      const lockTimer = setTimeout(() => {
+        clearInterval(intervalRef.current);
+        setDisplay(char);
+        setLocked(true);
+      }, 380);
+
+      return () => clearTimeout(lockTimer);
+    }, startDelay);
+
+    return () => {
+      clearTimeout(startTimer);
+      clearInterval(intervalRef.current);
+    };
+  }, [char, startDelay, isSpace]);
+
+  return (
+    <motion.span
+      animate={{
+        color: locked ? undefined : "#3EFFC2",
+        opacity: locked ? 1 : 0.9,
+      }}
+      transition={{ duration: 0.1 }}
+      style={{
+        display: "inline-block",
+        minWidth: isSpace ? "0.3em" : undefined,
+      }}
+    >
+      {display}
+    </motion.span>
+  );
+}
+
+function ScrambleName({ text, color, baseDelay = 0 }) {
+  const letters = text.split("");
+  return (
+    <Typography
+      component="span"
+      sx={{
+        fontFamily: '"Clash Display",sans-serif',
+        fontWeight: 600,
+        fontSize: "clamp(4rem, 14vw, 14rem)",
+        lineHeight: 0.86,
+        letterSpacing: "-0.045em",
+        color: color,
+        display: "block",
+      }}
+    >
+      {letters.map((char, i) => (
+        <ScrambleLetter
+          key={i}
+          char={char}
+          isSpace={char === " "}
+          startDelay={baseDelay + i * 55}
+        />
+      ))}
+    </Typography>
+  );
+}
+
+const up = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay, duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+});
 
 export function HeroText() {
   const { setState } = useCursorState();
@@ -42,7 +126,7 @@ export function HeroText() {
       <Box
         sx={{
           position: "absolute",
-          top: { xs: 100, md: 130 },
+          top: { xs: 80, md: 110 },
           left: { xs: 24, md: 40, lg: 48 },
           pointerEvents: "all",
         }}
@@ -57,57 +141,46 @@ export function HeroText() {
         </motion.div>
       </Box>
 
-      {/* Right column — metadata block */}
+      {/* Right metadata — desktop only */}
       <Box
         sx={{
           position: "absolute",
-          top: { xs: "auto", md: 130 },
-          bottom: { xs: 380, md: "auto" },
-          right: { xs: 24, md: 40, lg: 48 },
-          pointerEvents: "all",
+          top: { md: 110 },
+          right: { md: 40, lg: 48 },
           display: { xs: "none", md: "flex" },
           flexDirection: "column",
           gap: 1.5,
           textAlign: "right",
+          pointerEvents: "all",
         }}
       >
-        <motion.div {...up(0.25)}>
-          <Typography sx={{ ...mono, color: "#404040" }}>
-            Engineer · Builder
-          </Typography>
-        </motion.div>
-        <motion.div {...up(0.32)}>
-          <Typography sx={{ ...mono, color: "#404040" }}>
-            04Y · 15+ Shipped
-          </Typography>
-        </motion.div>
-        <motion.div {...up(0.39)}>
-          <Typography sx={{ ...mono, color: "#404040" }}>
-            MSc · Griffith Dublin
-          </Typography>
-        </motion.div>
+        {[
+          { text: "Engineer · Builder", delay: 0.2 },
+          { text: "4Y · 15+ Shipped", delay: 0.28 },
+          { text: "MSc · Griffith Dublin", delay: 0.36 },
+        ].map(({ text, delay }) => (
+          <motion.div key={text} {...up(delay)}>
+            <Typography sx={{ ...mono, color: "#505050" }}>{text}</Typography>
+          </motion.div>
+        ))}
       </Box>
 
-      {/* Main name — massive, bottom-left */}
-      <Box sx={{ pointerEvents: "all", maxWidth: "100%" }}>
-        <motion.div {...up(0.35)}>
-          <Typography
-            component="h1"
-            sx={{
-              fontFamily: '"Clash Display",sans-serif',
-              fontWeight: 600,
-              fontSize: "clamp(4rem, 14vw, 14rem)",
-              lineHeight: 0.86,
-              letterSpacing: "-0.045em",
-              color: "#F5F5F5",
-              mb: 0.5,
-            }}
-          >
-            Saim
-          </Typography>
+      {/* Main content */}
+      <Box sx={{ pointerEvents: "all" }}>
+        {/* Names with scramble */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.01, delay: 0.3 }}
+        >
+          <ScrambleName text="Saim" color="#F5F5F5" baseDelay={400} />
         </motion.div>
 
-        <motion.div {...up(0.5)}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.01, delay: 0.3 }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -116,171 +189,83 @@ export function HeroText() {
               flexWrap: "wrap",
             }}
           >
-            <Typography
-              component="span"
-              sx={{
-                fontFamily: '"Clash Display",sans-serif',
-                fontWeight: 600,
-                fontSize: "clamp(4rem, 14vw, 14rem)",
-                lineHeight: 0.86,
-                letterSpacing: "-0.045em",
-                color: "#3EFFC2",
-              }}
-            >
-              Kaskar
-              <Box component="span" sx={{ color: "#F5F5F5" }}>
-                .
-              </Box>
-            </Typography>
-
-            {/* Inline meta */}
-            <Box
-              sx={{
-                display: { xs: "none", lg: "flex" },
-                flexDirection: "column",
-                gap: 1,
-                pb: 3,
-                ml: 2,
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Box
-                  sx={{
-                    width: 7,
-                    height: 7,
-                    background: "#3EFFC2",
-                    borderRadius: "50%",
-                    boxShadow: "0 0 8px #3EFFC2",
-                  }}
-                />
-                <Typography sx={{ ...mono, color: "#A0A0A0" }}>
-                  Open to opportunities
-                </Typography>
-              </Box>
-              <Typography
-                sx={{
-                  fontFamily: '"Satoshi",sans-serif',
-                  fontSize: "0.95rem",
-                  color: "#606060",
-                  maxWidth: 260,
-                  lineHeight: 1.5,
-                }}
-              >
-                Building real-time and AI-powered products from Dublin.
-              </Typography>
-            </Box>
+            <ScrambleName text="Kaskar." color="#3EFFC2" baseDelay={800} />
           </Box>
         </motion.div>
 
-        {/* Bottom row — actions + mobile meta */}
-        <motion.div {...up(0.7)}>
+        {/* CTAs — simple, no repetition */}
+        <motion.div {...up(1.4)}>
           <Box
             sx={{
               display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: 3,
+              alignItems: "center",
+              gap: { xs: 4, md: 6 },
               mt: { xs: 4, md: 5 },
+              flexWrap: "wrap",
             }}
           >
-            {/* Actions — text-based, not buttons */}
             <Box
+              component="a"
+              href="#projects"
+              {...cp}
               sx={{
                 display: "flex",
-                gap: { xs: 3, md: 5 },
                 alignItems: "center",
-                flexWrap: "wrap",
+                gap: 1.5,
+                textDecoration: "none",
+                cursor: "pointer",
+                "&:hover .arrow": { transform: "translateX(5px)" },
+                "&:hover .label": { color: "#3EFFC2" },
               }}
             >
-              <Box
-                component="a"
-                href="#projects"
-                {...cp}
+              <Typography
+                className="label"
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1.5,
-                  textDecoration: "none",
-                  cursor: "pointer",
-                  "&:hover .arrow": { transform: "translateX(4px)" },
-                  "&:hover .text": { color: "#3EFFC2" },
+                  fontFamily: '"Satoshi",sans-serif',
+                  fontSize: { xs: "1rem", md: "1.1rem" },
+                  fontWeight: 500,
+                  color: "#F5F5F5",
+                  borderBottom: "1px solid #3EFFC2",
+                  pb: 0.25,
+                  transition: "color 0.2s ease",
                 }}
               >
-                <Typography
-                  className="text"
-                  sx={{
-                    fontFamily: '"Satoshi",sans-serif',
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    color: "#F5F5F5",
-                    fontWeight: 500,
-                    transition: "color 0.2s ease",
-                    borderBottom: "1px solid #3EFFC2",
-                    pb: 0.25,
-                  }}
-                >
-                  See the work
-                </Typography>
-                <Box
-                  className="arrow"
-                  sx={{
-                    color: "#3EFFC2",
-                    transition: "transform 0.25s ease",
-                    fontFamily: '"Geist Mono",monospace',
-                    fontSize: "1rem",
-                  }}
-                >
-                  →
-                </Box>
-              </Box>
-
+                See the work
+              </Typography>
               <Box
-                component="a"
-                href="#contact"
-                {...cp}
+                className="arrow"
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  textDecoration: "none",
-                  cursor: "pointer",
-                  "&:hover .text": { color: "#3EFFC2" },
+                  color: "#3EFFC2",
+                  fontFamily: '"Geist Mono",monospace',
+                  fontSize: "1.1rem",
+                  transition: "transform 0.25s ease",
                 }}
               >
-                <Typography
-                  className="text"
-                  sx={{
-                    fontFamily: '"Satoshi",sans-serif',
-                    fontSize: { xs: "1rem", md: "1.1rem" },
-                    color: "#606060",
-                    fontWeight: 500,
-                    transition: "color 0.2s ease",
-                  }}
-                >
-                  Get in touch
-                </Typography>
+                →
               </Box>
             </Box>
 
-            {/* Mobile-only inline meta */}
             <Box
+              component="a"
+              href="#contact"
+              {...cp}
               sx={{
-                display: { xs: "flex", lg: "none" },
-                alignItems: "center",
-                gap: 1,
+                textDecoration: "none",
+                cursor: "pointer",
+                "&:hover .label": { color: "#3EFFC2" },
               }}
             >
-              <Box
+              <Typography
+                className="label"
                 sx={{
-                  width: 6,
-                  height: 6,
-                  background: "#3EFFC2",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 8px #3EFFC2",
+                  fontFamily: '"Satoshi",sans-serif',
+                  fontSize: { xs: "1rem", md: "1.1rem" },
+                  fontWeight: 500,
+                  color: "#707070",
+                  transition: "color 0.2s ease",
                 }}
-              />
-              <Typography sx={{ ...mono, color: "#A0A0A0" }}>
-                Available
+              >
+                Get in touch
               </Typography>
             </Box>
           </Box>

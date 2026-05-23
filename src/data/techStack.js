@@ -1,227 +1,292 @@
+// score: out of 100 — what recruiters see
+// level: internal label
+// years: experience string
 export const techCategories = [
   {
     label: "Frontend",
+    key: "frontend",
+    summary: "4+ years building production UIs",
     items: [
       {
         name: "React",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      },
-      {
-        name: "Next.js",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        level: "Expert",
+        years: "4y",
+        score: 92,
       },
       {
         name: "TypeScript",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        level: "Expert",
+        years: "3y",
+        score: 88,
       },
       {
         name: "JavaScript",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        level: "Expert",
+        years: "5y",
+        score: 95,
+      },
+      {
+        name: "Next.js",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 80,
       },
       {
         name: "Tailwind",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 82,
       },
       {
         name: "Material UI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 78,
       },
       {
         name: "Angular",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 65,
       },
       {
         name: "HTML5",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+        level: "Expert",
+        years: "5y",
+        score: 96,
       },
       {
         name: "CSS3",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+        level: "Expert",
+        years: "5y",
+        score: 93,
       },
     ],
   },
   {
     label: "Backend",
+    key: "backend",
+    summary: "Full-stack across multiple languages",
     items: [
-      {
-        name: "Spring Boot",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-      },
       {
         name: "Node.js",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        level: "Expert",
+        years: "4y",
+        score: 90,
       },
       {
         name: "Express",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+        level: "Expert",
+        years: "3y",
+        score: 88,
+      },
+      {
+        name: "Spring Boot",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+        level: "Strong",
+        years: "1y",
+        score: 72,
       },
       {
         name: "FastAPI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-      },
-      {
-        name: "Go",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
-      },
-      {
-        name: "Java",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        level: "Strong",
+        years: "1y",
+        score: 75,
       },
       {
         name: "Python",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 78,
+      },
+      {
+        name: "Java",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 74,
+      },
+      {
+        name: "Go",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+        level: "Learning",
+        years: "<1y",
+        score: 45,
       },
     ],
   },
   {
     label: "AI & ML",
+    key: "aiml",
+    summary: "LLM integration, NLP pipelines, ML training",
     items: [
       {
         name: "LangChain",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        level: "Strong",
+        years: "1y",
+        score: 76,
+      },
+      {
+        name: "LangSmith",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 68,
       },
       {
         name: "scikit-learn",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 74,
       },
       {
         name: "spaCy",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 65,
       },
       {
         name: "NLTK",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 68,
       },
       {
         name: "pandas",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 78,
       },
       {
         name: "NumPy",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
-      },
-      {
-        name: "Jupyter",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 76,
       },
     ],
   },
   {
     label: "Databases",
+    key: "databases",
+    summary: "SQL and NoSQL in production",
     items: [
       {
         name: "MongoDB",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+        level: "Strong",
+        years: "3y",
+        score: 82,
       },
       {
         name: "SQL",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        level: "Strong",
+        years: "3y",
+        score: 80,
       },
       {
         name: "SQLite",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 78,
       },
       {
         name: "Firestore",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+        level: "Working",
+        years: "1y",
+        score: 65,
       },
     ],
   },
   {
     label: "Cloud & DevOps",
+    key: "cloud",
+    summary: "Real deployments, real production traffic",
     items: [
       {
         name: "AWS",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-      },
-      {
-        name: "Azure",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+        level: "Strong",
+        years: "3y",
+        score: 78,
       },
       {
         name: "Docker",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 76,
+      },
+      {
+        name: "Azure",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 62,
       },
       {
         name: "GitHub",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        level: "Expert",
+        years: "5y",
+        score: 94,
+      },
+      {
+        name: "Nginx",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
+        level: "Working",
+        years: "2y",
+        score: 68,
       },
     ],
   },
   {
     label: "Real-Time",
+    key: "realtime",
+    summary: "WebRTC, sockets, low-latency systems",
     items: [
       {
         name: "WebRTC",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        level: "Strong",
+        years: "1y",
+        score: 74,
       },
       {
         name: "Socket.IO",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
+        level: "Strong",
+        years: "2y",
+        score: 80,
       },
       {
-        name: "WebSockets",
+        name: "LiveKit",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        level: "Working",
+        years: "1y",
+        score: 70,
       },
     ],
-  },
-];
-
-export const floatingIcons = [
-  {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "Next.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Python",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-  {
-    name: "Java",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-  },
-  {
-    name: "Docker",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    name: "MongoDB",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "AWS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-  },
-  {
-    name: "Go",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
-  },
-  {
-    name: "Spring",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-  },
-  {
-    name: "FastAPI",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-  },
-  {
-    name: "GitHub",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  },
-  {
-    name: "SQL",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
   },
 ];

@@ -16,14 +16,7 @@ const mono = {
 
 export default function Home() {
   return (
-    <Box
-      component="main"
-      sx={{
-        position: "relative",
-        zIndex: 1,
-        pt: "44px" /* status bar offset */,
-      }}
-    >
+    <Box component="main" sx={{ position: "relative", zIndex: 1, pt: "44px" }}>
       <HeroSection />
       <AboutSection />
       <TechSection />
@@ -48,6 +41,7 @@ export default function Home() {
             gap: 2,
           }}
         >
+          {/* Left: logo + copyright */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Typography
               sx={{
@@ -63,15 +57,67 @@ export default function Home() {
                 .
               </Box>
             </Typography>
-            <Typography sx={{ ...mono, color: "#404040" }}>
-              © 2026 · Built in Dublin
-            </Typography>
+            <Box sx={{ width: 1, height: 14, background: "#2E2E2E" }} />
+            <Typography sx={{ ...mono, color: "#404040" }}>© 2026</Typography>
+            <Box
+              sx={{
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                background: "#3EFFC2",
+                opacity: 0.5,
+              }}
+            />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+              <Typography sx={{ ...mono, color: "#404040" }}>
+                Made with
+              </Typography>
+              <Box
+                component="span"
+                sx={{
+                  color: "#E53935",
+                  fontSize: "0.9rem",
+                  display: "inline-block",
+                  animation: "heartbeat 1.4s ease-in-out infinite",
+                  "@keyframes heartbeat": {
+                    "0%, 100%": { transform: "scale(1)" },
+                    "14%": { transform: "scale(1.35)" },
+                    "28%": { transform: "scale(1)" },
+                    "42%": { transform: "scale(1.2)" },
+                    "70%": { transform: "scale(1)" },
+                  },
+                }}
+              >
+                ♥
+              </Box>
+            </Box>
           </Box>
 
+          {/* Right: stack + back to top */}
           <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
-            <Typography sx={{ ...mono, color: "#404040" }}>
-              Next.js · Three.js · Motion
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+              {["Next.js", "Three.js", "Motion", "MUI"].map((tech, i, arr) => (
+                <Box
+                  key={tech}
+                  sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                >
+                  <Typography sx={{ ...mono, color: "#404040" }}>
+                    {tech}
+                  </Typography>
+                  {i < arr.length - 1 && (
+                    <Box
+                      sx={{
+                        width: 2,
+                        height: 2,
+                        borderRadius: "50%",
+                        background: "#3EFFC2",
+                        opacity: 0.4,
+                      }}
+                    />
+                  )}
+                </Box>
+              ))}
+            </Box>
             <Box
               component="a"
               href="#hero"

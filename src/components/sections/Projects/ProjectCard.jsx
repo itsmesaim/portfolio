@@ -36,6 +36,122 @@ const GRADIENTS = {
   freelance: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
 };
 
+function BlueprintPlaceholder({ project, index }) {
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 2,
+        zIndex: 0,
+      }}
+    >
+      {/* Grid lines */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `
+          linear-gradient(rgba(62,255,194,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(62,255,194,0.04) 1px, transparent 1px)
+        `,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* Corner brackets */}
+      {[
+        {
+          top: 14,
+          left: 14,
+          borderTop: "1px solid rgba(62,255,194,0.4)",
+          borderLeft: "1px solid rgba(62,255,194,0.4)",
+        },
+        {
+          top: 14,
+          right: 14,
+          borderTop: "1px solid rgba(62,255,194,0.4)",
+          borderRight: "1px solid rgba(62,255,194,0.4)",
+        },
+        {
+          bottom: 14,
+          left: 14,
+          borderBottom: "1px solid rgba(62,255,194,0.4)",
+          borderLeft: "1px solid rgba(62,255,194,0.4)",
+        },
+        {
+          bottom: 14,
+          right: 14,
+          borderBottom: "1px solid rgba(62,255,194,0.4)",
+          borderRight: "1px solid rgba(62,255,194,0.4)",
+        },
+      ].map((style, i) => (
+        <Box
+          key={i}
+          sx={{ position: "absolute", width: 18, height: 18, ...style }}
+        />
+      ))}
+
+      {/* Big faded number */}
+      <Typography
+        sx={{
+          fontFamily: '"Clash Display",sans-serif',
+          fontSize: "clamp(4rem, 10vw, 7rem)",
+          fontWeight: 700,
+          color: "rgba(62,255,194,0.06)",
+          letterSpacing: "-0.05em",
+          lineHeight: 1,
+          userSelect: "none",
+          zIndex: 1,
+        }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </Typography>
+
+      {/* Stack chips */}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 0.75,
+          justifyContent: "center",
+          px: 3,
+          zIndex: 1,
+        }}
+      >
+        {project.stack.slice(0, 5).map((tech) => (
+          <Box
+            key={tech}
+            sx={{
+              px: 1.25,
+              py: 0.4,
+              border: "1px solid rgba(62,255,194,0.12)",
+              borderRadius: 1,
+              background: "rgba(62,255,194,0.04)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: '"Geist Mono",monospace',
+                fontSize: "0.62rem",
+                color: "rgba(62,255,194,0.45)",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+              }}
+            >
+              {tech}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}
+
 export function ProjectCard({ project, index, onClick }) {
   const ref = useRef(null);
   const [hovered, setHovered] = useState(false);
@@ -46,9 +162,10 @@ export function ProjectCard({ project, index, onClick }) {
 
   const onMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width) * 100;
-    const ny = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlow({ x: nx, y: ny });
+    setGlow({
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    });
   };
 
   return (
@@ -92,29 +209,35 @@ export function ProjectCard({ project, index, onClick }) {
             background: GRADIENTS[project.id] || GRADIENTS.freelance,
           }}
         >
-          {project.images?.[0] && (
-            <Box
-              component="img"
-              src={project.images[0]}
-              alt={project.title}
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
-                transform: hovered ? "scale(1.06)" : "scale(1)",
-              }}
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-            />
-          )}
+          {/* Blueprint placeholder — always visible unless image loads */}
+          <BlueprintPlaceholder project={project} index={index} />
+
+          {/* Real image — covers placeholder when it loads */}
+          <Box
+            component="img"
+            src={project.images?.[0] || ""}
+            alt={project.title}
+            sx={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 1,
+              transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+              transform: hovered ? "scale(1.06)" : "scale(1)",
+            }}
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
+          />
 
           {/* Spotlight overlay */}
           <Box
             sx={{
               position: "absolute",
               inset: 0,
+              zIndex: 2,
               background: `radial-gradient(circle at ${glow.x}% ${glow.y}%, rgba(62,255,194,0.15) 0%, transparent 50%)`,
               opacity: hovered ? 1 : 0,
               transition: "opacity 0.3s ease",
@@ -122,12 +245,13 @@ export function ProjectCard({ project, index, onClick }) {
             }}
           />
 
-          {/* Corner number */}
+          {/* Corner number badge */}
           <Box
             sx={{
               position: "absolute",
               top: 16,
               left: 16,
+              zIndex: 3,
               px: 1.5,
               py: 0.5,
               background: "rgba(13,13,13,0.7)",
@@ -141,12 +265,13 @@ export function ProjectCard({ project, index, onClick }) {
             </Typography>
           </Box>
 
-          {/* View action — bottom-right */}
+          {/* View case CTA */}
           <Box
             sx={{
               position: "absolute",
               bottom: 16,
               right: 16,
+              zIndex: 3,
               px: 2,
               py: 1,
               background: "rgba(13,13,13,0.7)",
@@ -166,7 +291,6 @@ export function ProjectCard({ project, index, onClick }) {
 
         {/* Content */}
         <Box sx={{ order: { xs: 2, md: isAlt ? 1 : 2 } }}>
-          {/* Status + tagline row */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <Box
@@ -189,7 +313,6 @@ export function ProjectCard({ project, index, onClick }) {
             </Typography>
           </Box>
 
-          {/* Big title */}
           <Typography
             sx={{
               fontFamily: '"Clash Display",sans-serif',
@@ -205,7 +328,6 @@ export function ProjectCard({ project, index, onClick }) {
             {project.title}
           </Typography>
 
-          {/* Description */}
           <Typography
             sx={{
               fontFamily: '"Satoshi",sans-serif',
@@ -219,9 +341,8 @@ export function ProjectCard({ project, index, onClick }) {
             {project.description}
           </Typography>
 
-          {/* Stack — mono row */}
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, mb: 1 }}>
-            {project.stack.map((tech, i) => (
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            {project.stack.map((tech) => (
               <Typography
                 key={tech}
                 sx={{

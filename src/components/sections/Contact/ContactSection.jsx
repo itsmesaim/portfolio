@@ -16,11 +16,11 @@ const mono = {
 const SOCIALS = [
   { label: "LinkedIn", handle: "saim-kaskar", href: personal.social.linkedin },
   { label: "GitHub", handle: "itsmesaim", href: personal.social.github },
-  {
-    label: "Live Demo",
-    handle: "meetx.saimjs.com",
-    href: personal.social.live,
-  },
+  // {
+  //   label: "Live Demo",
+  //   handle: "meetx.saimjs.com",
+  //   href: personal.social.live,
+  // },
 ];
 
 export function ContactSection() {

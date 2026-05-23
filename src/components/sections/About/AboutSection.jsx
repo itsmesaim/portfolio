@@ -190,10 +190,11 @@ export function AboutSection() {
               maxWidth: 640,
             }}
           >
-            Full-stack engineer working across React, TypeScript, Spring Boot,
-            FastAPI, and Go. I build real-time systems with WebRTC and LiveKit,
-            and integrate AI features using LangChain and LangSmith — not as
-            demos, but in production apps handling real users.
+            From Mumbai to Dublin. Started freelancing during my BEng — billing
+            systems for cafes, inventory tools for restaurants, marketing sites
+            that actually brought in customers. Graduated with First Class
+            Honours in Computer Engineering, specialising in AI and ML in
+            Healthcare. Then packed up and moved to Ireland for the MSc.
           </Typography>
 
           <Typography
@@ -205,8 +206,8 @@ export function AboutSection() {
               maxWidth: 640,
             }}
           >
-            Currently finishing my MSc in Computing at Griffith College Dublin
-            while shipping{" "}
+            Now completed my Master in Computing at Griffith College Dublin
+            while building{" "}
             <Box
               component="a"
               href={personal.social.live}
@@ -221,9 +222,10 @@ export function AboutSection() {
             >
               MeetX
             </Box>{" "}
-            — a real-time video platform with LangChain-powered transcription,
-            AI summaries, and an in-meeting Q&A chatbot. I pick up new stacks
-            fast and ship production code within weeks, not months.
+            , a real-time video platform with WebRTC, LiveKit, and
+            LangChain-powered AI features. I pick up new technologies fast and
+            get them to production within weeks. Currently deep in LangChain and
+            LangGraph. I don't just write code. I ship things that get used.
           </Typography>
         </Box>
       </Box>

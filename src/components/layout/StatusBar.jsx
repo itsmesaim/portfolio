@@ -49,36 +49,7 @@ export function StatusBar() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Box
-          sx={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
-            background: "#3EFFC2",
-            boxShadow: "0 0 8px #3EFFC2",
-            animation: "pulse-dot 2s ease-in-out infinite",
-            flexShrink: 0,
-          }}
-        />
-        <Typography sx={{ ...mono, color: "#3EFFC2" }}>Available</Typography>
-        <Box
-          sx={{
-            display: { xs: "none", md: "block" },
-            width: 1,
-            height: 10,
-            background: "#2A2A2A",
-            flexShrink: 0,
-          }}
-        />
-        <Typography
-          sx={{
-            ...mono,
-            color: "#505050",
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          Shipping MeetX
-        </Typography>
+        <Typography sx={{ ...mono, color: "#3EFFC2" }}>Open to Work</Typography>
       </Box>
 
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

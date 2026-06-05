@@ -87,9 +87,10 @@ function CodeRow({ tech, idx }) {
       }}
       sx={{
         display: "grid",
+        // FIXED: removed the extra 60px column that caused double bars
         gridTemplateColumns: {
           xs: "20px 16px 1fr auto",
-          md: "28px 18px 1fr 60px auto",
+          md: "28px 18px 1fr auto",
         },
         alignItems: "center",
         gap: { xs: 1, md: 1.5 },
@@ -100,6 +101,7 @@ function CodeRow({ tech, idx }) {
         transition: "background 0.2s ease",
       }}
     >
+      {/* Line number */}
       <Typography
         sx={{
           fontFamily: '"Geist Mono",monospace',
@@ -113,6 +115,7 @@ function CodeRow({ tech, idx }) {
         {idx + 2}
       </Typography>
 
+      {/* Logo */}
       <Box
         component="img"
         src={tech.icon}
@@ -129,6 +132,7 @@ function CodeRow({ tech, idx }) {
         }}
       />
 
+      {/* Name + years + level */}
       <Box
         sx={{
           display: "flex",
@@ -184,12 +188,7 @@ function CodeRow({ tech, idx }) {
         </Box>
       </Box>
 
-      <Box
-        sx={{ display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
-      >
-        <ScoreBar score={tech.score} level={tech.level} />
-      </Box>
-
+      {/* FIXED: single score bar only */}
       <ScoreBar score={tech.score} level={tech.level} />
     </Box>
   );
@@ -250,9 +249,8 @@ function MobileChips({ cat }) {
 }
 
 export function TechSection() {
-  // const [active, setActive] = useState(0);
   const [active, setActive] = useState(0);
-  const [globeMode, setGlobeMode] = useState("overview"); // "overview" | "detail"
+  const [globeMode, setGlobeMode] = useState("overview");
   const editorRef = useRef(null);
   const inView = useInView(editorRef, { once: true });
   const { setState } = useCursorState();
@@ -269,6 +267,7 @@ export function TechSection() {
           "linear-gradient(180deg, transparent 0%, #0E0E0E 50%, transparent 100%)",
       }}
     >
+      {/* Section header */}
       <Box
         sx={{
           display: "flex",
@@ -284,6 +283,7 @@ export function TechSection() {
         <Typography sx={{ ...mono, color: "#808080" }}>The Toolkit</Typography>
       </Box>
 
+      {/* Headline */}
       <Box sx={{ mb: { xs: 4, md: 5 } }}>
         <Typography
           sx={{
@@ -305,11 +305,7 @@ export function TechSection() {
         </Typography>
       </Box>
 
-      {/* Globe — desktop only */}
-      {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
-        <TechGlobe />
-      </Box> */}
-
+      {/* Globe */}
       <Box sx={{ display: "block" }}>
         <TechGlobe
           selectedKey={
@@ -452,7 +448,7 @@ export function TechSection() {
           </Typography>
         </Box>
 
-        {/* Tabs with right fade indicator */}
+        {/* Tabs */}
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -505,7 +501,6 @@ export function TechSection() {
               </Box>
             ))}
           </Box>
-          {/* Right fade — signals more tabs exist */}
           <Box
             sx={{
               position: "absolute",
@@ -656,7 +651,7 @@ export function TechSection() {
                       color: "#E8E8E8",
                     }}
                   >
-                    {"};"}
+                    {"}"}
                   </Typography>
                   <Typography
                     sx={{
@@ -689,23 +684,9 @@ export function TechSection() {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
-              {/* <Box
-                sx={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: "#3EFFC2",
-                  boxShadow: "0 0 6px #3EFFC2",
-                  animation: "pulse-dot 2s ease-in-out infinite",
-                }}
-              /> */}
-              <Typography
-                sx={{ ...mono, color: "#707070", fontSize: "0.63rem" }}
-              >
-                Saved
-              </Typography>
-            </Box>
+            <Typography sx={{ ...mono, color: "#707070", fontSize: "0.63rem" }}>
+              Saved
+            </Typography>
             <Typography
               sx={{
                 ...mono,

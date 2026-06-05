@@ -109,7 +109,7 @@ export const techCategories = [
         name: "Python",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
         level: "Strong",
-        years: "2y",
+        years: "3y",
         score: 78,
       },
       {

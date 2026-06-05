@@ -219,16 +219,6 @@ export function ContactSection() {
             <Box
               sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1.5 }}
             >
-              <Box
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: "#3EFFC2",
-                  boxShadow: "0 0 10px #3EFFC2",
-                  animation: "pulse-dot 2s ease-in-out infinite",
-                }}
-              />
               <Typography sx={{ ...mono, color: "#3EFFC2" }}>
                 Status: Available
               </Typography>

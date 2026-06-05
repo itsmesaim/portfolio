@@ -143,20 +143,6 @@ export function AboutSection() {
               Dublin, IE
             </Typography>
           </Box>
-          {/* Status dot */}
-          <Box
-            sx={{
-              position: "absolute",
-              top: 12,
-              right: 12,
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: "#3EFFC2",
-              boxShadow: "0 0 10px #3EFFC2",
-              animation: "pulse-dot 2s ease-in-out infinite",
-            }}
-          />
         </Box>
 
         {/* Headline */}
@@ -172,10 +158,10 @@ export function AboutSection() {
               mb: 3,
             }}
           >
-            Four years building things people actually use —{" "}
+            Four years shipping software people actually use,  {" "}
             <Box component="span" sx={{ color: "#606060" }}>
-              from production video platforms to ML pipelines to billing systems
-              running real cafes.
+              real-time video platforms, AI pipelines, and billing systems
+              running live in cafes across two countries.
             </Box>
           </Typography>
 

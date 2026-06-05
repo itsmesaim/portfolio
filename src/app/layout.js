@@ -2,7 +2,7 @@ import "./globals.css";
 import { Providers } from "./Providers";
 
 export const metadata = {
-  title: "Saim Kaskar — Full-Stack Engineer & AI Developer | Dublin",
+  title: "Saim Kaskar : Full-Stack Engineer & AI Developer | Dublin",
   description:
     "Full-stack engineer based in Dublin. Building real-time systems with React, Spring Boot, WebRTC and AI-powered products with LangChain. MSc Computing, Griffith College Dublin. Open to work.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata = {
   authors: [{ name: "Saim Kaskar", url: "https://saimjs.com" }],
   creator: "Saim Kaskar",
   openGraph: {
-    title: "Saim Kaskar — Full-Stack Engineer & AI Developer",
+    title: "Saim Kaskar : Full-Stack Engineer & AI Developer",
     description:
       "Building real-time, AI-powered products from Dublin. React · Spring Boot · LangChain · WebRTC.",
     url: "https://saimjs.com",
@@ -28,7 +28,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Saim Kaskar — Full-Stack Engineer & AI Developer",
+    title: "Saim Kaskar : Full-Stack Engineer & AI Developer",
     description:
       "Building real-time, AI-powered products from Dublin. React · Spring Boot · LangChain · WebRTC.",
   },

@@ -17,6 +17,8 @@ const STATUS_CONFIG = {
   "in-progress": { color: "#FFB347", label: "In Progress" },
   academic: { color: "#A78BFA", label: "Research" },
   client: { color: "#60A5FA", label: "Client" },
+  paid: { color: "#60A5FA", label: "Client Work" },
+  fixing: { color: "#FFB347", label: "In Progress" },
 };
 
 const GRADIENTS = {
@@ -50,7 +52,6 @@ function BlueprintPlaceholder({ project, index }) {
         zIndex: 0,
       }}
     >
-      {/* Grid lines */}
       <Box
         sx={{
           position: "absolute",
@@ -63,7 +64,6 @@ function BlueprintPlaceholder({ project, index }) {
         }}
       />
 
-      {/* Corner brackets */}
       {[
         {
           top: 14,
@@ -96,7 +96,6 @@ function BlueprintPlaceholder({ project, index }) {
         />
       ))}
 
-      {/* Big faded number */}
       <Typography
         sx={{
           fontFamily: '"Clash Display",sans-serif',
@@ -112,7 +111,6 @@ function BlueprintPlaceholder({ project, index }) {
         {String(index + 1).padStart(2, "0")}
       </Typography>
 
-      {/* Stack chips */}
       <Box
         sx={{
           display: "flex",
@@ -157,7 +155,11 @@ export function ProjectCard({ project, index, onClick }) {
   const [hovered, setHovered] = useState(false);
   const [glow, setGlow] = useState({ x: 50, y: 50 });
   const { setState } = useCursorState();
-  const status = STATUS_CONFIG[project.status] ?? STATUS_CONFIG["live"];
+
+  // case-insensitive status lookup
+  const status =
+    STATUS_CONFIG[project.status?.toLowerCase()] ??
+    STATUS_CONFIG["in-progress"];
   const isAlt = index % 2 === 1;
 
   const onMove = (e) => {
@@ -209,10 +211,8 @@ export function ProjectCard({ project, index, onClick }) {
             background: GRADIENTS[project.id] || GRADIENTS.freelance,
           }}
         >
-          {/* Blueprint placeholder — always visible unless image loads */}
           <BlueprintPlaceholder project={project} index={index} />
 
-          {/* Real image — covers placeholder when it loads */}
           <Box
             component="img"
             src={project.images?.[0] || ""}
@@ -232,7 +232,6 @@ export function ProjectCard({ project, index, onClick }) {
             }}
           />
 
-          {/* Spotlight overlay */}
           <Box
             sx={{
               position: "absolute",
@@ -245,7 +244,6 @@ export function ProjectCard({ project, index, onClick }) {
             }}
           />
 
-          {/* Corner number badge */}
           <Box
             sx={{
               position: "absolute",
@@ -265,7 +263,6 @@ export function ProjectCard({ project, index, onClick }) {
             </Typography>
           </Box>
 
-          {/* View case CTA */}
           <Box
             sx={{
               position: "absolute",
@@ -293,14 +290,13 @@ export function ProjectCard({ project, index, onClick }) {
         <Box sx={{ order: { xs: 2, md: isAlt ? 1 : 2 } }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              {/* flat square — no blink, no glow */}
               <Box
                 sx={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: "50%",
+                  width: 6,
+                  height: 6,
                   background: status.color,
-                  boxShadow: `0 0 8px ${status.color}`,
-                  animation: "pulse-dot 2s ease-in-out infinite",
+                  flexShrink: 0,
                 }}
               />
               <Typography sx={{ ...mono, color: status.color }}>

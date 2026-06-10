@@ -66,6 +66,43 @@ export const projects = [
     tier: 1,
   },
   {
+    id: "pong-mern",
+    title: "PONG-MERN",
+    tagline: "Real-Time Multiplayer Pong",
+    description:
+      "Server-authoritative multiplayer Pong with optional accounts, persistent stats, power-up orbs, and reconnect grace handling. Deployed live at pong.saimjs.com.",
+    images: [
+      "/projects/pong-1.png",
+      "/projects/pong-2.png",
+      "/projects/pong-3.png",
+      "/projects/pong-4.png",
+      "/projects/pong-5.png",
+    ],
+    problem:
+      "I wanted to properly understand server-authoritative game state not just syncing two clients, but building a system where the server owns the physics, validates all input, and handles the messy real-world stuff like dropped connections mid-game.",
+    whatIBuilt:
+      "A shared 60Hz server loop runs physics across all active rooms simultaneously. Swept collision detection prevents fast balls tunneling through paddles. Friend matches pause on disconnect and give the player 10 seconds to reconnect and reclaim their seat via a stable clientId — if they don't return, a walkover is recorded in MongoDB. Power-up orbs spawn mid-rally and apply randomised effects: speed boost with a telegraph warning, curve spin, or opponent paddle shrink. Optional JWT accounts persist win/loss records, match history, and a global leaderboard. AI mode runs client-side and reports results to the same stats pipeline.",
+    unique:
+      "Two visual themes (neon arcade and phosphor green) toggle from the header. The canvas reads CSS variables live so the entire game:  paddles, ball, scores, orbs : recolours instantly. On mobile the board rotates vertical with remapped touch input. Deployed with the API on a separate subdomain under pm2 and the static frontend served directly by Nginx.",
+    stack: [
+      "React",
+      "Node.js",
+      "Socket.IO",
+      "Express",
+      "MongoDB",
+      "JWT",
+      "Canvas API",
+      "Nginx",
+      "pm2",
+    ],
+    github: "https://github.com/itsmesaim/PONG-MERN",
+    live: "https://pong.saimjs.com",
+    status: "live",
+    featured: false,
+    tier: 2,
+  },
+
+  {
     id: "ir-system",
     title: "Information Retrieval System",
     tagline: "NLP Pipeline · Vector Space Model",
@@ -118,42 +155,7 @@ export const projects = [
     featured: false,
     tier: 2,
   },
-  {
-    id: "pong-mern",
-    title: "PONG-MERN",
-    tagline: "Real-Time Multiplayer Pong",
-    description:
-      "Server-authoritative multiplayer Pong with optional accounts, persistent stats, power-up orbs, and reconnect grace handling. Deployed live at pong.saimjs.com.",
-    images: [
-      "/projects/pong-1.png",
-      "/projects/pong-2.png",
-      "/projects/pong-3.png",
-      "/projects/pong-4.png",
-      "/projects/pong-5.png",
-    ],
-    problem:
-      "I wanted to properly understand server-authoritative game state — not just syncing two clients, but building a system where the server owns the physics, validates all input, and handles the messy real-world stuff like dropped connections mid-game.",
-    whatIBuilt:
-      "A shared 60Hz server loop runs physics across all active rooms simultaneously. Swept collision detection prevents fast balls tunneling through paddles. Friend matches pause on disconnect and give the player 10 seconds to reconnect and reclaim their seat via a stable clientId — if they don't return, a walkover is recorded in MongoDB. Power-up orbs spawn mid-rally and apply randomised effects: speed boost with a telegraph warning, curve spin, or opponent paddle shrink. Optional JWT accounts persist win/loss records, match history, and a global leaderboard. AI mode runs client-side and reports results to the same stats pipeline.",
-    unique:
-      "Two visual themes (neon arcade and phosphor green) toggle from the header. The canvas reads CSS variables live so the entire game — paddles, ball, scores, orbs — recolours instantly. On mobile the board rotates vertical with remapped touch input. Deployed with the API on a separate subdomain under pm2 and the static frontend served directly by Nginx.",
-    stack: [
-      "React",
-      "Node.js",
-      "Socket.IO",
-      "Express",
-      "MongoDB",
-      "JWT",
-      "Canvas API",
-      "Nginx",
-      "pm2",
-    ],
-    github: "https://github.com/itsmesaim/PONG-MERN",
-    live: "https://pong.saimjs.com",
-    status: "live",
-    featured: false,
-    tier: 2,
-  },
+
   {
     id: "fastapi-f1",
     title: "F1 Racing Data Platform",

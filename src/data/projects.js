@@ -10,6 +10,7 @@ export const projects = [
       "/projects/meetx-2.png",
       "/projects/meetx-3.png",
       "/projects/meetx-4.png",
+      "/projects/meetx-5.png",
     ],
     problem:
       "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in — not bolted on as an afterthought.",
@@ -40,7 +41,8 @@ export const projects = [
     tagline: "MSc Dissertation · ML Network Security",
     description:
       "Simulated a smart city 6G network and trained ML models to detect cyber threats in real-time, with a human-in-the-loop review dashboard.",
-    images: ["/projects/6g-firewall-1.png", "/projects/6g-firewall-2.png"],
+    images: ["/projects/6gfirewall-1.png", "/projects/6gfirewall-2.png"],
+
     problem:
       "6G network security is largely uncharted — there are no production playbooks yet. I needed to model real attack vectors and build defences before the infrastructure even exists.",
     whatIBuilt:
@@ -119,18 +121,35 @@ export const projects = [
   {
     id: "pong-mern",
     title: "PONG-MERN",
-    tagline: "Real-Time Multiplayer Game",
+    tagline: "Real-Time Multiplayer Pong",
     description:
-      "Cross-continent multiplayer Pong with AI opponent mode, dynamic ball physics, and mobile touch controls. Zero login required.",
-    images: ["/projects/pong-1.png"],
+      "Server-authoritative multiplayer Pong with optional accounts, persistent stats, power-up orbs, and reconnect grace handling. Deployed live at pong.saimjs.com.",
+    images: [
+      "/projects/pong-1.png",
+      "/projects/pong-2.png",
+      "/projects/pong-3.png",
+      "/projects/pong-4.png",
+      "/projects/pong-5.png",
+    ],
     problem:
-      "I wanted to deeply understand real-time state synchronization. Keeping two clients in sync across latency is one of those problems that sounds simple until you build it.",
+      "I wanted to properly understand server-authoritative game state — not just syncing two clients, but building a system where the server owns the physics, validates all input, and handles the messy real-world stuff like dropped connections mid-game.",
     whatIBuilt:
-      "A React frontend with a Node.js/Express backend and Socket.IO for real-time sync. Custom game loop with delta-time physics, shared room IDs for matchmaking, mobile touch controls, and an AI opponent mode for solo play.",
+      "A shared 60Hz server loop runs physics across all active rooms simultaneously. Swept collision detection prevents fast balls tunneling through paddles. Friend matches pause on disconnect and give the player 10 seconds to reconnect and reclaim their seat via a stable clientId — if they don't return, a walkover is recorded in MongoDB. Power-up orbs spawn mid-rally and apply randomised effects: speed boost with a telegraph warning, curve spin, or opponent paddle shrink. Optional JWT accounts persist win/loss records, match history, and a global leaderboard. AI mode runs client-side and reports results to the same stats pipeline.",
     unique:
-      "Zero login required — you generate a room code, share it, and play. No accounts, no friction. Plays smoothly across continents thanks to client-side prediction.",
-    stack: ["React", "Node.js", "Socket.IO", "Express", "CSS3"],
+      "Two visual themes (neon arcade and phosphor green) toggle from the header. The canvas reads CSS variables live so the entire game — paddles, ball, scores, orbs — recolours instantly. On mobile the board rotates vertical with remapped touch input. Deployed with the API on a separate subdomain under pm2 and the static frontend served directly by Nginx.",
+    stack: [
+      "React",
+      "Node.js",
+      "Socket.IO",
+      "Express",
+      "MongoDB",
+      "JWT",
+      "Canvas API",
+      "Nginx",
+      "pm2",
+    ],
     github: "https://github.com/itsmesaim/PONG-MERN",
+    live: "https://pong.saimjs.com",
     status: "live",
     featured: false,
     tier: 2,

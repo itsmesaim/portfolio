@@ -195,6 +195,31 @@ export const projects = [
     tier: 2,
   },
   {
+    id: "aeroflow",
+    title: "AeroFlow",
+    tagline: "Airport Management System",
+    description:
+      "Full-stack airport operations platform with real-time flight updates, role-based portals for admin, agents, and staff, and a passenger booking flow with QR boarding passes. Built on Node.js, MongoDB, and Socket.IO.",
+    images: [
+      "/projects/aeroflow-1.png",
+      "/projects/aeroflow-2.png",
+      "/projects/aeroflow-3.png",
+    ],
+    problem:
+      "I wanted to build a system with real operational complexity — not another CRUD app, but something with overlapping concerns: live data that multiple roles act on simultaneously, scheduling constraints that can conflict, and a booking pipeline that has to stay consistent from search through to boarding.",
+    whatIBuilt:
+      "Five resource domains — flights, passengers, bookings, boarding, and gates — each with its own controllers, models, and routes. JWT auth gates four distinct roles (admin, agent, staff, public) down to the endpoint level. Socket.IO pushes live flight and boarding updates into role-specific rooms, so a flight board and a staff boarding console stay in sync without polling. The booking flow runs from flight search to seat selection to a QR-coded boarding pass generated on confirmation, with email delivery via nodemailer. An admin analytics endpoint runs MongoDB aggregation pipelines for revenue-by-day, bookings-over-time, top routes, and flight-status distribution, with class-based pricing folded into the revenue math.",
+    unique:
+      "Gate assignment isn't a dropdown — it checks aircraft-type compatibility against each gate and detects time-window conflicts, marking a gate occupied if another active flight holds it within a two-hour window. The boarding system models a real queue with call, board, and boarded states that staff advance through, broadcasting each transition live to everyone watching that flight.",
+    stack: ["Node.js", "Express", "MongoDB", "Mongoose", "Socket.IO", "JWT", "Nodemailer", "QRCode"],
+    github: "https://github.com/itsmesaim/AeroFlow",
+    live: "",
+    status: "github",
+    featured: false,
+    tier: 2,
+
+  },
+  {
     id: "financial-management",
     title: "Financial Management App",
     tagline: "FastAPI Backend",

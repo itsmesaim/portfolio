@@ -227,7 +227,6 @@ export function ProjectModal({ project, open, onClose }) {
                   borderRadius: "50%",
                   background: status.color,
                   boxShadow: `0 0 8px ${status.color}`,
-                  animation: "pulse-dot 2s ease-in-out infinite",
                 }}
               />
               <Typography sx={{ ...mono, color: status.color }}>

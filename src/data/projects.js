@@ -66,6 +66,43 @@ export const projects = [
     tier: 1,
   },
   {
+    id: "jobradar-ai",
+    title: "JobRadar AI",
+    tagline: "AI-Powered Job Search Copilot",
+    description:
+      "Full-stack job hunting platform that crawls listings, rates fit against your CV with an LLM, and tracks applications through a Kanban pipeline.",
+    images: [
+      "/projects/JobRadarAI-1.png",
+      "/projects/JobRadarAI-2.png",
+      "/projects/JobRadarAI-3.png",
+    ],
+    problem:
+      "Job hunting means scanning hundreds of listings to find the ones actually worth your time, then losing track of who you applied to and why. I wanted a system that does the filtering for me and tells me honestly where I stand.",
+    whatIBuilt:
+      "A FastAPI + React/TypeScript platform where you upload a CV once, set role and location preferences, and the system crawls Adzuna and Jooble for live postings. Each job is rated 1-10 against your CV using LangChain with structured Pydantic output — returning a score, matched strengths, gaps, and a verdict. A two-stage filter checks for structural mismatches (IC vs management, junior vs senior, domain-as-core-requirement) before scoring skill overlap, so the system doesn't waste your time on categorically wrong roles just because the tech stack overlaps. Every job moves through a Kanban pipeline from New to Offer or Rejected, and a one-click export generates a structured brief for writing cover letters.",
+    unique:
+      "Provider-agnostic LLM layer — swap between local Ollama/Qwen and OpenAI with one environment variable, with full LangSmith tracing on every call. The rating prompt explicitly separates categorical disqualifiers from gradable skill gaps, catching mismatches like a management role requiring 3+ years leading engineers when the candidate's experience is IC-only.",
+    stack: [
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "MongoDB",
+      "LangChain",
+      "LangSmith",
+      "Pydantic",
+      "Ollama",
+      "OpenAI",
+      "Adzuna API",
+      "Jooble API",
+    ],
+    live: "https://jobradar.saimjs.com",
+    github: "https://github.com/itsmesaim/jobRadarAI",
+    status: "live",
+    featured: true,
+    tier: 1,
+  },
+
+  {
     id: "pong-mern",
     title: "PONG-MERN",
     tagline: "Real-Time Multiplayer Pong",
@@ -211,13 +248,21 @@ export const projects = [
       "Five resource domains — flights, passengers, bookings, boarding, and gates — each with its own controllers, models, and routes. JWT auth gates four distinct roles (admin, agent, staff, public) down to the endpoint level. Socket.IO pushes live flight and boarding updates into role-specific rooms, so a flight board and a staff boarding console stay in sync without polling. The booking flow runs from flight search to seat selection to a QR-coded boarding pass generated on confirmation, with email delivery via nodemailer. An admin analytics endpoint runs MongoDB aggregation pipelines for revenue-by-day, bookings-over-time, top routes, and flight-status distribution, with class-based pricing folded into the revenue math.",
     unique:
       "Gate assignment isn't a dropdown — it checks aircraft-type compatibility against each gate and detects time-window conflicts, marking a gate occupied if another active flight holds it within a two-hour window. The boarding system models a real queue with call, board, and boarded states that staff advance through, broadcasting each transition live to everyone watching that flight.",
-    stack: ["Node.js", "Express", "MongoDB", "Mongoose", "Socket.IO", "JWT", "Nodemailer", "QRCode"],
+    stack: [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "Socket.IO",
+      "JWT",
+      "Nodemailer",
+      "QRCode",
+    ],
     github: "https://github.com/itsmesaim/AeroFlow",
     live: "",
     status: "github",
     featured: false,
     tier: 2,
-
   },
   {
     id: "financial-management",

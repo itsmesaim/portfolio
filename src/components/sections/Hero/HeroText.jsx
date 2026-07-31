@@ -156,8 +156,7 @@ export function HeroText() {
       >
         {[
           { text: "Engineer · Builder", delay: 0.2 },
-          { text: "4Y · 15+ Shipped", delay: 0.28 },
-          { text: "MSc · Griffith Dublin", delay: 0.36 },
+          { text: "MSc · Griffith Dublin", delay: 0.28 },
         ].map(({ text, delay }) => (
           <motion.div key={text} {...up(delay)}>
             <Typography sx={{ ...mono, color: "#505050" }}>{text}</Typography>
@@ -191,6 +190,26 @@ export function HeroText() {
           >
             <ScrambleName text="Kaskar." color="#3EFFC2" baseDelay={800} />
           </Box>
+        </motion.div>
+
+        {/* Tagline */}
+        <motion.div {...up(1.2)}>
+          <Typography
+            sx={{
+              fontFamily: '"Satoshi",sans-serif',
+              fontSize: { xs: "1.15rem", md: "1.5rem" },
+              letterSpacing: "-0.01em",
+              maxWidth: 640,
+              mt: { xs: 2, md: 3 },
+            }}
+          >
+            <Box component="span" sx={{ color: "#F5F5F5", fontWeight: 600 }}>
+              Fighting AI with AI.
+            </Box>{" "}
+            <Box component="span" sx={{ color: "#707070", fontWeight: 400 }}>
+              Full-stack AI engineer based in Dublin.
+            </Box>
+          </Typography>
         </motion.div>
 
         {/* CTAs — simple, no repetition */}

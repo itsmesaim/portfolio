@@ -13,7 +13,8 @@ const NAV_LINKS = [
   { num: "02", label: "Stack", href: "#tech" },
   { num: "03", label: "Work", href: "#projects" },
   { num: "04", label: "Trajectory", href: "#experience" },
-  { num: "05", label: "Contact", href: "#contact" },
+  { num: "05", label: "Journey", href: "#journey" },
+  { num: "06", label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -23,7 +24,7 @@ export function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 

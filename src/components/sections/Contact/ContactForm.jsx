@@ -36,6 +36,12 @@ export function ContactForm() {
   } = useForm({ defaultValues: { reason: "role" } });
 
   const onSubmit = async (data) => {
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setError(
+        "Contact form is not configured. Email me directly at saimkaskar1@gmail.com",
+      );
+      return;
+    }
     setSending(true);
     setError(null);
     try {

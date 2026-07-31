@@ -15,7 +15,10 @@ export function NeuralBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = canvas.getContext("2d");
+    const CONNECTION_DIST_SQ = CONNECTION_DIST * CONNECTION_DIST;
+    const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -28,12 +31,17 @@ export function NeuralBackground() {
       }));
     };
     resize();
-    window.addEventListener("resize", resize);
+    let resizeTimer;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 200);
+    };
+    window.addEventListener("resize", onResize);
 
     const onMove = (e) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
     };
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
 
     const tick = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -43,8 +51,9 @@ export function NeuralBackground() {
       particles.forEach((p) => {
         const dx = p.x - mx;
         const dy = p.y - my;
-        const d = Math.hypot(dx, dy);
-        if (d < MOUSE_RADIUS && d > 0.5) {
+        const dSq = dx * dx + dy * dy;
+        if (dSq < MOUSE_RADIUS_SQ && dSq > 0.25) {
+          const d = Math.sqrt(dSq);
           const force = ((MOUSE_RADIUS - d) / MOUSE_RADIUS) * 0.3;
           p.vx += (dx / d) * force;
           p.vy += (dy / d) * force;
@@ -66,11 +75,11 @@ export function NeuralBackground() {
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const d = Math.hypot(
-            particles[i].x - particles[j].x,
-            particles[i].y - particles[j].y,
-          );
-          if (d < CONNECTION_DIST) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dSq = dx * dx + dy * dy;
+          if (dSq < CONNECTION_DIST_SQ) {
+            const d = Math.sqrt(dSq);
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -82,12 +91,23 @@ export function NeuralBackground() {
       }
       rafRef.current = requestAnimationFrame(tick);
     };
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafRef.current);
+      } else {
+        tick();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
     tick();
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 

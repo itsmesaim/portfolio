@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { ContactForm } from "./ContactForm";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
+import { SectionModel } from "@/components/shared/SectionModel";
 import { personal } from "@/data/personal";
 import { useCursorState } from "@/hooks/useCursorState";
 
@@ -39,6 +40,12 @@ export function ContactSection() {
         px: { xs: 3, md: 5, lg: 6 },
       }}
     >
+      <SectionModel
+        path="/models/astronaut.glb"
+        scale={0.55}
+        sx={{ top: 24, right: { xs: 24, md: 64 } }}
+      />
+
       {/* Section header */}
       <Box
         sx={{
@@ -50,7 +57,7 @@ export function ContactSection() {
           pb: 3,
         }}
       >
-        <Typography sx={{ ...mono, color: "#3EFFC2" }}>05</Typography>
+        <Typography sx={{ ...mono, color: "#3EFFC2" }}>06</Typography>
         <Box sx={{ width: 40, height: 1, background: "#2E2E2E" }} />
         <Typography sx={{ ...mono, color: "#606060" }}>Get In Touch</Typography>
       </Box>

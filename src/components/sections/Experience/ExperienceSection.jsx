@@ -53,33 +53,6 @@ function LogEntry({ item, index }) {
           <Typography sx={{ ...mono, color: "#606060" }}>
             {item.type}
           </Typography>
-          {item.current && (
-            <>
-              <Box
-                sx={{
-                  width: 3,
-                  height: 3,
-                  borderRadius: "50%",
-                  background: "#606060",
-                }}
-              />
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
-                <Box
-                  sx={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: "#3EFFC2",
-                    boxShadow: "0 0 6px #3EFFC2",
-                    animation: "pulse-dot 2s ease-in-out infinite",
-                  }}
-                />
-                <Typography sx={{ ...mono, color: "#3EFFC2" }}>
-                  Active
-                </Typography>
-              </Box>
-            </>
-          )}
         </Box>
       </Box>
 

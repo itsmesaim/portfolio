@@ -5,20 +5,20 @@ export const techCategories = [
   {
     label: "Frontend",
     key: "frontend",
-    summary: "4+ years building production UIs",
+    summary: "Building production UIs",
     items: [
       {
         name: "React",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
         level: "Expert",
-        years: "4y",
+        years: "2-3y",
         score: 92,
       },
       {
         name: "TypeScript",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
         level: "Expert",
-        years: "3y",
+        years: "2-3y",
         score: 88,
       },
       {

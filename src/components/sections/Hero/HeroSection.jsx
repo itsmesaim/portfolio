@@ -31,8 +31,8 @@ export function HeroSection() {
       sx={{
         position: "relative",
         width: "100%",
-        height: "100vh",
-        minHeight: 720,
+        minHeight: "100vh",
+        height: "auto",
         overflow: "hidden",
       }}
     >

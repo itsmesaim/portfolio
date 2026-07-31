@@ -29,3 +29,6 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 .next/
 readme.MD
+
+# Claude Code tooling
+.claude/

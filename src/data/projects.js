@@ -1,71 +1,5 @@
 export const projects = [
   {
-    id: "meetx",
-    title: "MeetX",
-    tagline: "Real-Time Video Platform with AI",
-    description:
-      "Production-grade video conferencing with AI-powered transcription, session summaries, and an in-meeting Q&A chatbot.",
-    images: [
-      "/projects/meetx-1.png",
-      "/projects/meetx-2.png",
-      "/projects/meetx-3.png",
-      "/projects/meetx-4.png",
-      "/projects/meetx-5.png",
-    ],
-    problem:
-      "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in — not bolted on as an afterthought.",
-    whatIBuilt:
-      "A full-stack platform with React/TypeScript on the frontend and Spring Boot (Java) on the backend. WebRTC + LiveKit handle real-time video. LangChain and LangSmith power transcription, AI session summaries, and an in-meeting Q&A chatbot, with every LLM call traced for evaluation.",
-    unique:
-      "Every LLM call is observable through LangSmith — most AI features ship as black boxes, mine show their work. Also using a Spring Boot backend instead of the usual Node.js stack, which gives proper thread safety for real-time signalling.",
-    stack: [
-      "React",
-      "TypeScript",
-      "Spring Boot",
-      "WebRTC",
-      "LiveKit",
-      "WebSockets",
-      "LangChain",
-      "LangSmith",
-      "Jest",
-    ],
-    live: "https://meetx.saimjs.com",
-    github: "https://github.com/itsmesaim/meetX",
-    status: "in-progress",
-    featured: true,
-    tier: 1,
-  },
-  {
-    id: "6g-firewall",
-    title: "AI Firewall — 6G Threat Detection",
-    tagline: "MSc Dissertation · ML Network Security",
-    description:
-      "Simulated a smart city 6G network and trained ML models to detect cyber threats in real-time, with a human-in-the-loop review dashboard.",
-    images: ["/projects/6gfirewall-1.png", "/projects/6gfirewall-2.png"],
-
-    problem:
-      "6G network security is largely uncharted — there are no production playbooks yet. I needed to model real attack vectors and build defences before the infrastructure even exists.",
-    whatIBuilt:
-      "An NS-3 (C++) simulation of a smart city 6G network with simulated attacks. Multiple ML models were trained and compared for threat classification, with a React dashboard plus WebSocket integration for real-time alerts and human-in-the-loop review.",
-    unique:
-      "Modelled a genuine agentic AI system — one that learns and improves from human operator decisions over time. The dashboard isn't just a viewer; it's part of the training loop.",
-    stack: [
-      "Python",
-      "scikit-learn",
-      "NS-3",
-      "C++",
-      "React",
-      "WebSockets",
-      "Jupyter",
-      "pandas",
-      "numpy",
-    ],
-    github: "https://github.com/itsmesaim/AI-firewall",
-    status: "academic",
-    featured: true,
-    tier: 1,
-  },
-  {
     id: "jobradar-ai",
     title: "JobRadar AI",
     tagline: "AI-Powered Job Search Copilot",
@@ -100,6 +34,110 @@ export const projects = [
     status: "live",
     featured: true,
     tier: 1,
+    hasImages: true,
+  },
+  {
+    id: "6g-firewall",
+    title: "AI Firewall — 6G Threat Detection",
+    tagline: "MSc Dissertation · ML Network Security",
+    description:
+      "Simulated a smart city 6G network and trained ML models to detect cyber threats in real-time, with a human-in-the-loop review dashboard.",
+    images: ["/projects/6gfirewall-1.png", "/projects/6gfirewall-2.png"],
+
+    problem:
+      "6G network security is largely uncharted — there are no production playbooks yet. I needed to model real attack vectors and build defences before the infrastructure even exists.",
+    whatIBuilt:
+      "An NS-3 (C++) simulation of a smart city 6G network with simulated attacks. Multiple ML models were trained and compared for threat classification, with a React dashboard plus WebSocket integration for real-time alerts and human-in-the-loop review.",
+    unique:
+      "Modelled a genuine agentic AI system — one that learns and improves from human operator decisions over time. The dashboard isn't just a viewer; it's part of the training loop.",
+    stack: [
+      "Python",
+      "scikit-learn",
+      "NS-3",
+      "C++",
+      "React",
+      "WebSockets",
+      "Jupyter",
+      "pandas",
+      "numpy",
+    ],
+    github: "https://github.com/itsmesaim/AI-firewall",
+    status: "academic",
+    featured: true,
+    tier: 1,
+    hasImages: true,
+  },
+  {
+    id: "meetx",
+    title: "MeetX",
+    tagline: "Real-Time Video Platform with AI",
+    description:
+      "Production-grade video conferencing with AI-powered transcription, session summaries, and an in-meeting Q&A chatbot.",
+    images: [
+      "/projects/meetx-1.png",
+      "/projects/meetx-2.png",
+      "/projects/meetx-3.png",
+      "/projects/meetx-4.png",
+      "/projects/meetx-5.png",
+    ],
+    problem:
+      "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in — not bolted on as an afterthought.",
+    whatIBuilt:
+      "A full-stack platform with React/TypeScript on the frontend and Spring Boot (Java) on the backend. WebRTC + LiveKit handle real-time video. LangChain and LangSmith power transcription, AI session summaries, and an in-meeting Q&A chatbot, with every LLM call traced for evaluation.",
+    unique:
+      "Every LLM call is observable through LangSmith — most AI features ship as black boxes, mine show their work. Also using a Spring Boot backend instead of the usual Node.js stack, which gives proper thread safety for real-time signalling.",
+    stack: [
+      "React",
+      "TypeScript",
+      "Spring Boot",
+      "WebRTC",
+      "LiveKit",
+      "WebSockets",
+      "LangChain",
+      "LangSmith",
+      "Jest",
+    ],
+    live: "https://meetx.saimjs.com",
+    github: "https://github.com/itsmesaim/meetX",
+    status: "in-progress",
+    featured: true,
+    tier: 1,
+    hasImages: true,
+  },
+
+  {
+    id: "diabeto-predict",
+    title: "Diabeto Predict",
+    tagline: "ML-Powered Diabetes Risk Screening",
+    description:
+      "A full-stack health screening app with a React questionnaire frontend and a Flask REST API that runs a scikit-learn model trained on the Pima Indians diabetes dataset.",
+    images: [
+      "/projects/diabeto-1.png",
+      "/projects/diabeto-2.png",
+      "/projects/diabeto-3.png",
+    ],
+    problem:
+      "Most people don't know their clinical diabetes markers — glucose, insulin, skin fold thickness — but early awareness matters. I wanted a tool that asks simple lifestyle questions and still feeds a real ML model, without requiring a lab visit first.",
+    whatIBuilt:
+      "A React + Flask application with an 8-step wizard that maps everyday answers to Pima dataset features. The Flask API exposes POST /predict, loads a pickled LogisticRegression model, and returns a risk result with tailored prevention guidance. The model was trained on raw clinical features (~70% test accuracy) and the full request path is documented in the README.",
+    unique:
+      "Non-medical inputs become clinical features — glucose estimated from meal timing, insulin from post-meal symptoms, skin thickness from physical descriptions — so lay users can drive a real backend ML pipeline. Mobile-first UI with a progress wizard, not a single long form.",
+    stack: [
+      "React",
+      "Vite",
+      "Flask",
+      "Python",
+      "scikit-learn",
+      "pandas",
+      "REST API",
+      "LogisticRegression",
+    ],
+    live: "https://diabetio.saimjs.com",
+    github: "https://github.com/itsmesaim/diabetic_prediction",
+    status: "completed",
+    featured: true,
+    tier: 2,
+    hasImages: true,
   },
 
   {
@@ -137,6 +175,7 @@ export const projects = [
     status: "live",
     featured: false,
     tier: 2,
+    hasImages: true,
   },
 
   {
@@ -285,7 +324,7 @@ export const projects = [
   },
   {
     id: "freelance",
-    title: "15+ Client Projects",
+    title: "10+ Client Projects",
     tagline: "Freelance · 2022 – Present",
     description:
       "Real-world delivery for paying clients: billing systems for restaurants, inventory management tools, marketing sites, and WordPress builds — all deployed and live.",
@@ -293,7 +332,7 @@ export const projects = [
     problem:
       "Tutorial projects don't teach you what happens when a real business depends on the code. Started freelancing to learn what 'production' actually means.",
     whatIBuilt:
-      "Full-stack delivery on 15+ paying projects: React/Node frontends, AWS or VPS deployments with proper SSL and CI/CD, plus LLM integrations for client workflow automation. One client's marketing site directly drove 15% of new customer acquisitions in its launch period.",
+      "Full-stack delivery on 10+ paying projects: React/Node frontends, AWS or VPS deployments with proper SSL and CI/CD, plus LLM integrations for client workflow automation. One client's marketing site directly drove 15% of new customer acquisitions in its launch period.",
     unique:
       "Every project shipped to production with real users — billing systems that handle real money, inventory tools that affect real stock counts. No demos, only live systems.",
     stack: ["React", "Node.js", "AWS", "WordPress", "MySQL", "Docker", "CI/CD"],

@@ -1,10 +1,11 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { motion, useInView } from "motion/react";
+import { motion, useInView, AnimatePresence } from "motion/react";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
 import { personal } from "@/data/personal";
+import { useCursorState } from "@/hooks/useCursorState";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
@@ -50,6 +51,13 @@ function Counter({ value, label, idx }) {
 }
 
 export function AboutSection() {
+  const [journeyOpen, setJourneyOpen] = useState(false);
+  const { setState } = useCursorState();
+  const cp = {
+    onMouseEnter: () => setState("hover"),
+    onMouseLeave: () => setState("default"),
+  };
+
   return (
     <SectionWrapper
       id="about"
@@ -79,7 +87,11 @@ export function AboutSection() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "auto 1fr" },
+          gridTemplateColumns: {
+            xs: "1fr",
+            md: "auto 1fr",
+            lg: "auto 1fr auto",
+          },
           gap: { xs: 4, md: 6 },
           alignItems: "start",
           mb: { xs: 6, md: 8 },
@@ -88,7 +100,7 @@ export function AboutSection() {
         {/* Photo — compact card */}
         <Box
           sx={{
-            width: { xs: 180, md: 220 },
+            width: { xs: 220, md: 280, lg: 320 },
             flexShrink: 0,
             position: "relative",
             borderRadius: 2.5,
@@ -106,6 +118,8 @@ export function AboutSection() {
             component="img"
             src="/me.jpg"
             alt="Saim Kaskar"
+            loading="lazy"
+            decoding="async"
             sx={{
               width: "100%",
               height: "100%",
@@ -145,26 +159,7 @@ export function AboutSection() {
           </Box>
         </Box>
 
-        {/* Headline */}
         <Box>
-          <Typography
-            sx={{
-              fontFamily: '"Clash Display",sans-serif',
-              fontWeight: 500,
-              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.025em",
-              color: "#F5F5F5",
-              mb: 3,
-            }}
-          >
-            Four years shipping software people actually use,  {" "}
-            <Box component="span" sx={{ color: "#606060" }}>
-              real-time video platforms, AI pipelines, and billing systems
-              running live in cafes across two countries.
-            </Box>
-          </Typography>
-
           {/* Full bio — not split */}
           <Typography
             sx={{
@@ -176,11 +171,13 @@ export function AboutSection() {
               maxWidth: 640,
             }}
           >
-            From Mumbai to Dublin. Started freelancing during my BEng — billing
-            systems for cafes, inventory tools for restaurants, marketing sites
-            that actually brought in customers. Graduated with First Class
-            Honours in Computer Engineering, specialising in AI and ML in
-            Healthcare. Then packed up and moved to Ireland for the MSc.
+            I've been building things since before I really knew what I was
+            doing, freelance client work running through most of my BEng:
+            billing systems for cafes, inventory tools for restaurants,
+            marketing sites that actually brought in customers. Graduated with
+            First Class Honours in Computer Engineering, specialising in AI and
+            ML in Healthcare. Then came the bigger move, packing up for Ireland
+            to do my MSc.
           </Typography>
 
           <Typography
@@ -192,8 +189,26 @@ export function AboutSection() {
               maxWidth: 640,
             }}
           >
-            Now completed my Master in Computing at Griffith College Dublin
-            while building{" "}
+            Finished that Master in Computing at Griffith College Dublin, and
+            I'm back to freelancing full-time, this time building my own things
+            too.{" "}
+            <Box
+              component="a"
+              href="https://jobradar.saimjs.com"
+              target="_blank"
+              rel="noopener"
+              sx={{
+                color: "#3EFFC2",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(62,255,194,0.4)",
+                "&:hover": { borderBottomColor: "#3EFFC2" },
+              }}
+            >
+              JobRadar AI
+            </Box>{" "}
+            is the main one right now: a FAISS-based RAG pipeline running on
+            Mistral by default, with the option to route to DeepSeek or OpenAI
+            if you want.{" "}
             <Box
               component="a"
               href={personal.social.live}
@@ -208,10 +223,108 @@ export function AboutSection() {
             >
               MeetX
             </Box>{" "}
-            , a real-time video platform with WebRTC, LiveKit, and
-            LangChain-powered AI features. I pick up new technologies fast and
-            get them to production within weeks. Currently deep in LangChain and
-            LangGraph. I don't just write code. I ship things that get used.
+            is the other, a real-time video platform on WebRTC and LiveKit.
+          </Typography>
+
+          {/* Full journey — collapsed by default */}
+          <Box
+            component="button"
+            onClick={() => setJourneyOpen((v) => !v)}
+            {...cp}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              mt: 3,
+              background: "none",
+              border: "none",
+              p: 0,
+              cursor: "pointer",
+              "&:hover .arrow": { transform: "translateX(5px)" },
+              "&:hover .label": { color: "#3EFFC2" },
+            }}
+          >
+            <Typography
+              className="label"
+              sx={{
+                fontFamily: '"Satoshi",sans-serif',
+                fontSize: "1rem",
+                fontWeight: 500,
+                color: "#F5F5F5",
+                borderBottom: "1px solid #3EFFC2",
+                pb: 0.25,
+                transition: "color 0.2s ease",
+              }}
+            >
+              {journeyOpen ? "Collapse" : "Read my full journey"}
+            </Typography>
+            <Box
+              className="arrow"
+              sx={{
+                color: "#3EFFC2",
+                fontFamily: '"Geist Mono",monospace',
+                fontSize: "1rem",
+                transition: "transform 0.25s ease, rotate 0.25s ease",
+                rotate: journeyOpen ? "90deg" : "0deg",
+              }}
+            >
+              →
+            </Box>
+          </Box>
+
+          <AnimatePresence initial={false}>
+            {journeyOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: '"Satoshi",sans-serif',
+                    color: "#A0A0A0",
+                    lineHeight: 1.8,
+                    fontSize: "1rem",
+                    maxWidth: 640,
+                    mt: 3,
+                    whiteSpace: "pre-line",
+                  }}
+                >
+                  {`Real start was 2020: first year of engineering, entirely over Zoom, mid-COVID. Picked up web basics within that first half-year. By sem 3, I'd built something people actually thought was cool, no AI involved, just docs, Stack Overflow, and whatever the community could tell me. That got me my first paying client, then a site for my college's incubation cell.
+
+From there: React, then a slow slide into AI, ML, DL, NLP, information retrieval, a bit of game theory I've mostly forgotten by now. Alongside the actual coursework: software engineering, Agile, databases (SQL and NoSQL both), big data, computer networks, information security. Freelancing ran in the background the whole time, a mix of clients who paid well and clients who paid in "exposure." Took both kinds of work.
+
+BEng finished May 2024. Moved to Dublin that September for the MSc. Kept freelancing through it, and started building JobRadar AI on the side, a job search platform that rates fit against your CV instead of making you read every posting yourself. It's live now, deployed on a VPS I manage myself. Still adding to it. Still freelancing. Still figuring out the next thing.`}
+                </Typography>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Box>
+
+        {/* Pull-quote — fills the dead space on wide screens, hidden below lg */}
+        <Box
+          sx={{
+            display: { xs: "none", lg: "flex" },
+            alignItems: "center",
+            maxWidth: 260,
+            pl: 4,
+            borderLeft: "1px solid #1F1F1F",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: '"Clash Display",sans-serif',
+              fontWeight: 500,
+              fontSize: "1.4rem",
+              lineHeight: 1.3,
+              letterSpacing: "-0.01em",
+              color: "#606060",
+              "& span": { color: "#3EFFC2" },
+            }}
+          >
+            I don't just <span>write code.</span> I ship things that get used.
           </Typography>
         </Box>
       </Box>

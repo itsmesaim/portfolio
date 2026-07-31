@@ -13,10 +13,28 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: "https://saimjs.com/#journey",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: "https://saimjs.com/#tech",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: "https://saimjs.com/#projects",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: "https://saimjs.com/#experience",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
       url: "https://saimjs.com/#contact",

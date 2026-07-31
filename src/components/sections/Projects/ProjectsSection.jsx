@@ -6,6 +6,10 @@ import { projects } from "@/data/projects";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./ProjectModal";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
+import { SectionModel } from "@/components/shared/SectionModel";
+
+const visibleProjects = projects.filter((p) => p.hasImages);
+const hiddenProjects = projects.filter((p) => !p.hasImages);
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
@@ -16,6 +20,8 @@ const mono = {
 
 export function ProjectsSection() {
   const [selected, setSelected] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+  const shown = showAll ? projects : visibleProjects;
 
   return (
     <SectionWrapper
@@ -26,6 +32,12 @@ export function ProjectsSection() {
         px: { xs: 3, md: 5, lg: 6 },
       }}
     >
+      <SectionModel
+        path="/models/orb.glb"
+        scale={0.5}
+        sx={{ top: 24, right: { xs: 24, md: 64 } }}
+      />
+
       {/* Section header */}
       <Box
         sx={{
@@ -61,10 +73,34 @@ export function ProjectsSection() {
       </Box>
 
       <Box>
-        {projects.map((p, i) => (
+        {shown.map((p, i) => (
           <ProjectCard key={p.id} project={p} index={i} onClick={setSelected} />
         ))}
       </Box>
+
+      {!showAll && hiddenProjects.length > 0 && (
+        <Box sx={{ textAlign: "center", mt: { xs: 5, md: 7 } }}>
+          <Typography
+            component="button"
+            onClick={() => setShowAll(true)}
+            sx={{
+              ...mono,
+              fontSize: "0.75rem",
+              color: "#606060",
+              background: "none",
+              border: "1px solid #2E2E2E",
+              borderRadius: "999px",
+              px: 3,
+              py: 1.2,
+              cursor: "pointer",
+              transition: "color 0.2s, border-color 0.2s",
+              "&:hover": { color: "#3EFFC2", borderColor: "#3EFFC2" },
+            }}
+          >
+            Show {hiddenProjects.length} more projects
+          </Typography>
+        </Box>
+      )}
 
       <ProjectModal
         project={selected}

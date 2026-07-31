@@ -4,21 +4,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
 import { useCursorState } from "@/hooks/useCursorState";
+import { STATUS_CONFIG, DEFAULT_STATUS } from "./statusConfig";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
   letterSpacing: "0.1em",
   textTransform: "uppercase",
   fontSize: "0.7rem",
-};
-
-const STATUS_CONFIG = {
-  live: { color: "#3EFFC2", label: "Live" },
-  "in-progress": { color: "#FFB347", label: "In Progress" },
-  academic: { color: "#A78BFA", label: "Research" },
-  client: { color: "#60A5FA", label: "Client" },
-  paid: { color: "#60A5FA", label: "Client Work" },
-  fixing: { color: "#FFB347", label: "In Progress" },
 };
 
 const GRADIENTS = {
@@ -157,9 +149,7 @@ export function ProjectCard({ project, index, onClick }) {
   const { setState } = useCursorState();
 
   // case-insensitive status lookup
-  const status =
-    STATUS_CONFIG[project.status?.toLowerCase()] ??
-    STATUS_CONFIG["in-progress"];
+  const status = STATUS_CONFIG[project.status?.toLowerCase()] ?? DEFAULT_STATUS;
   const isAlt = index % 2 === 1;
 
   const onMove = (e) => {
@@ -184,6 +174,15 @@ export function ProjectCard({ project, index, onClick }) {
       }}
       onClick={() => onClick(project)}
       style={{ cursor: "pointer", position: "relative" }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px 0px" }}
+      transition={{
+        duration: 0.5,
+        delay: (index % 4) * 0.08,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      whileHover={{ y: -3 }}
       whileTap={{ scale: 0.995 }}
     >
       <Box
@@ -217,6 +216,8 @@ export function ProjectCard({ project, index, onClick }) {
             component="img"
             src={project.images?.[0] || ""}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             sx={{
               position: "absolute",
               inset: 0,

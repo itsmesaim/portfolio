@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { techCategories } from "@/data/techStack";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
+import { SectionModel } from "@/components/shared/SectionModel";
 import { useCursorState } from "@/hooks/useCursorState";
 
 const TechGlobe = dynamic(
@@ -267,6 +268,12 @@ export function TechSection() {
           "linear-gradient(180deg, transparent 0%, #0E0E0E 50%, transparent 100%)",
       }}
     >
+      <SectionModel
+        path="/models/alien.glb"
+        scale={0.6}
+        sx={{ top: 24, right: { xs: 24, md: 64 } }}
+      />
+
       {/* Section header */}
       <Box
         sx={{

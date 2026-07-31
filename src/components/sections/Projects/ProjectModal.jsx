@@ -11,19 +11,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { motion, AnimatePresence } from "motion/react";
+import { STATUS_CONFIG, DEFAULT_STATUS } from "./statusConfig";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
   letterSpacing: "0.1em",
   textTransform: "uppercase",
   fontSize: "0.7rem",
-};
-
-const STATUS_CONFIG = {
-  live: { color: "#3EFFC2", label: "Live" },
-  "in-progress": { color: "#FFB347", label: "In Progress" },
-  academic: { color: "#A78BFA", label: "Research" },
-  client: { color: "#60A5FA", label: "Client" },
 };
 
 function ImageCarousel({ images, title }) {
@@ -182,7 +176,7 @@ function ImageCarousel({ images, title }) {
 
 export function ProjectModal({ project, open, onClose }) {
   if (!project) return null;
-  const status = STATUS_CONFIG[project.status] ?? STATUS_CONFIG["live"];
+  const status = STATUS_CONFIG[project.status?.toLowerCase()] ?? DEFAULT_STATUS;
 
   return (
     <Dialog

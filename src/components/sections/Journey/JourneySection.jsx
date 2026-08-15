@@ -148,6 +148,7 @@ export function JourneySection() {
         </Box>
         <Box sx={{ mb: { xs: 4, md: 5 }, maxWidth: 900 }}>
           <Typography
+            component="h2"
             sx={{
               fontFamily: '"Clash Display",sans-serif',
               fontWeight: 500,

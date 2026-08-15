@@ -23,10 +23,14 @@ const GRADIENTS = {
   cipherhealth:
     "linear-gradient(135deg, #28200a 0%, #5c4a1a 50%, #28200a 100%)",
   "pong-mern": "linear-gradient(135deg, #280a1a 0%, #5c1a3d 50%, #280a1a 100%)",
-  "fastapi-f1":
+  "f1-stats-manager":
     "linear-gradient(135deg, #280a0a 0%, #5c1a1a 50%, #280a0a 100%)",
-  "task-manager":
+  "collab-taskboards":
     "linear-gradient(135deg, #082828 0%, #1a5c5c 50%, #082828 100%)",
+  "postnow-instaclone":
+    "linear-gradient(135deg, #0a1028 0%, #1a3a7c 50%, #0a1028 100%)",
+  "aeroflow-airport":
+    "linear-gradient(135deg, #0A1628 0%, #1a3a5c 50%, #0A1628 100%)",
   "financial-management":
     "linear-gradient(135deg, #0a280f 0%, #1a5c2a 50%, #0a280f 100%)",
   freelance: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",

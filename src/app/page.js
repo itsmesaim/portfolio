@@ -2,11 +2,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { HeroSection } from "@/components/sections/Hero/HeroSection";
 import { AboutSection } from "@/components/sections/About/AboutSection";
-import { JourneySection } from "@/components/sections/Journey/JourneySection";
 import { TechSection } from "@/components/sections/TechStack/TechSection";
 import { ProjectsSection } from "@/components/sections/Projects/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/Experience/ExperienceSection";
-import { ContactSection } from "@/components/sections/Contact/ContactSection";
+import { DeferredSections } from "@/components/layout/DeferredSections";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
@@ -23,8 +22,7 @@ export default function Home() {
       <TechSection />
       <ProjectsSection />
       <ExperienceSection />
-      <JourneySection />
-      <ContactSection />
+      <DeferredSections />
 
       <Box
         component="footer"

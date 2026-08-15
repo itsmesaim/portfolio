@@ -13,19 +13,10 @@ const mono = {
 const LINES = [
   { text: "$ npm run dev", color: "#F5F5F5", delay: 250 },
   { text: "", color: "#F5F5F5", delay: 100 },
-  { text: "> saim-portfolio@1.0.0 dev", color: "#606060", delay: 80 },
-  { text: "> next dev -p 3035", color: "#606060", delay: 80 },
+  { text: "   ▲ Next.js", color: "#F5F5F5", delay: 200 },
+  { text: "   - https://saimjs.com", color: "#A0A0A0", delay: 80 },
   { text: "", color: "#F5F5F5", delay: 100 },
-  { text: "   ▲ Next.js 16.2.6 (Turbopack)", color: "#F5F5F5", delay: 200 },
-  {
-    text: "   - Local:        http://localhost:3035",
-    color: "#A0A0A0",
-    delay: 80,
-  },
-  { text: "   - Network:      http://saimjs.com", color: "#A0A0A0", delay: 80 },
-  { text: "", color: "#F5F5F5", delay: 100 },
-  { text: " ✓ Ready in 412ms", color: "#3EFFC2", delay: 300 },
-  { text: " ✓ Compiled / in 1.2s", color: "#3EFFC2", delay: 200 },
+  { text: " ✓ Ready", color: "#3EFFC2", delay: 300 },
 ];
 
 export function BootScreen() {
@@ -131,7 +122,7 @@ export function BootScreen() {
                   fontSize: "0.7rem",
                 }}
               >
-                saim@portfolio: ~/saim-portfolio
+                saim@saimjs.com
               </Box>
             </Box>
 

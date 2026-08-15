@@ -10,7 +10,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { motion, AnimatePresence } from "motion/react";
 import { STATUS_CONFIG, DEFAULT_STATUS } from "./statusConfig";
 import { MagneticButton } from "@/components/shared/MagneticButton";
 
@@ -25,12 +24,18 @@ function ImageCarousel({ images, title }) {
   const [idx, setIdx] = useState(0);
   const total = images?.length || 0;
 
-  // Auto-advance every 4.5s
+  useEffect(() => {
+    images?.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, [images]);
+
   useEffect(() => {
     if (total <= 1) return;
     const id = setInterval(() => setIdx((i) => (i + 1) % total), 4500);
     return () => clearInterval(id);
-  }, [total]);
+  }, [total, idx]);
 
   if (!total) return null;
 
@@ -44,31 +49,30 @@ function ImageCarousel({ images, title }) {
         aspectRatio: "16/10",
         overflow: "hidden",
         borderRadius: 1.5,
-        background: "linear-gradient(135deg, #0A1628, #1a3a5c)",
+        background: "#111",
         mb: 4,
       }}
     >
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={idx}
-          src={images[idx]}
-          alt={`${title} screenshot ${idx + 1}`}
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          style={{
+      {images.map((src, i) => (
+        <Box
+          key={src}
+          component="img"
+          src={src}
+          alt={`${title} screenshot ${i + 1}`}
+          loading="eager"
+          decoding="async"
+          sx={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
-          }}
-          onError={(e) => {
-            e.target.style.display = "none";
+            opacity: i === idx ? 1 : 0,
+            transition: "opacity 0.3s ease",
+            pointerEvents: "none",
           }}
         />
-      </AnimatePresence>
+      ))}
 
       {/* Counter top-right */}
       <Box
@@ -217,11 +221,10 @@ export function ProjectModal({ project, open, onClose }) {
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <Box
                 sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
+                  width: 6,
+                  height: 6,
                   background: status.color,
-                  boxShadow: `0 0 8px ${status.color}`,
+                  flexShrink: 0,
                 }}
               />
               <Typography sx={{ ...mono, color: status.color }}>
@@ -270,7 +273,11 @@ export function ProjectModal({ project, open, onClose }) {
 
         {/* Carousel */}
         {project.images && project.images.length > 0 && (
-          <ImageCarousel images={project.images} title={project.title} />
+          <ImageCarousel
+            key={project.id}
+            images={project.images}
+            title={project.title}
+          />
         )}
 
         {/* Sections */}

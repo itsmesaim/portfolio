@@ -160,31 +160,36 @@ export function HeroText() {
 
       {/* Main content */}
       <Box sx={{ pointerEvents: "all" }}>
-        {/* Names with scramble */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.01, delay: 0.3 }}
+        <Box
+          component="h1"
+          aria-label="Saim Kaskar"
+          sx={{ m: 0, p: 0, font: "inherit", fontWeight: "inherit" }}
         >
-          <ScrambleName text="Saim" color="#F5F5F5" baseDelay={400} />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.01, delay: 0.3 }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "flex-end",
-              gap: { xs: 2, md: 3 },
-              flexWrap: "wrap",
-            }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.01, delay: 0.3 }}
           >
-            <ScrambleName text="Kaskar." color="#3EFFC2" baseDelay={800} />
-          </Box>
-        </motion.div>
+            <ScrambleName text="Saim" color="#F5F5F5" baseDelay={400} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.01, delay: 0.3 }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "flex-end",
+                gap: { xs: 2, md: 3 },
+                flexWrap: "wrap",
+              }}
+            >
+              <ScrambleName text="Kaskar." color="#3EFFC2" baseDelay={800} />
+            </Box>
+          </motion.div>
+        </Box>
 
         {/* Tagline */}
         <motion.div {...up(1.2)}>
@@ -201,7 +206,7 @@ export function HeroText() {
               Fighting AI with AI.
             </Box>{" "}
             <Box component="span" sx={{ color: "#707070", fontWeight: 400 }}>
-              Full-stack AI engineer based in Dublin.
+              Junior full-stack in Dublin. LangChain shipped. LangGraph next.
             </Box>
           </Typography>
         </motion.div>

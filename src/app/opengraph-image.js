@@ -29,18 +29,28 @@ export default function Image() {
       >
         Saim Kaskar
       </div>
-      <div style={{ display: "flex", fontSize: 72, fontWeight: 600 }}>
-        Full-Stack AI Engineer
+      <div style={{ display: "flex", fontSize: 64, fontWeight: 600 }}>
+        Junior Full-Stack Developer
       </div>
       <div
         style={{
           display: "flex",
-          fontSize: 32,
+          fontSize: 28,
           color: "#A0A0A0",
-          marginTop: 24,
+          marginTop: 20,
         }}
       >
-        Dublin, Ireland · saimjs.com
+        React · Node · LangChain · Dublin
+      </div>
+      <div
+        style={{
+          display: "flex",
+          fontSize: 22,
+          color: "#3EFFC2",
+          marginTop: 28,
+        }}
+      >
+        saimjs.com · open to work
       </div>
     </div>,
     { ...size },

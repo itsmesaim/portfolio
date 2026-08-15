@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { projects } from "@/data/projects";
+import { projects, clientWork } from "@/data/projects";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./ProjectModal";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
@@ -56,6 +56,7 @@ export function ProjectsSection() {
 
       <Box sx={{ mb: { xs: 6, md: 8 }, maxWidth: 900 }}>
         <Typography
+          component="h2"
           sx={{
             fontFamily: '"Clash Display",sans-serif',
             fontWeight: 500,
@@ -76,6 +77,98 @@ export function ProjectsSection() {
         {shown.map((p, i) => (
           <ProjectCard key={p.id} project={p} index={i} onClick={setSelected} />
         ))}
+      </Box>
+
+      <Box
+        sx={{
+          mt: { xs: 6, md: 8 },
+          p: { xs: 3, md: 4 },
+          border: "1px solid #1F1F1F",
+          borderRadius: 2,
+          background: "rgba(255,255,255,0.015)",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            mb: 2,
+            flexWrap: "wrap",
+          }}
+        >
+          <Box
+            sx={{
+              width: 6,
+              height: 6,
+              background: "#60A5FA",
+              flexShrink: 0,
+            }}
+          />
+          <Typography sx={{ ...mono, color: "#60A5FA" }}>
+            Client Work
+          </Typography>
+          <Box sx={{ width: 1, height: 10, background: "#2E2E2E" }} />
+          <Typography sx={{ ...mono, color: "#606060" }}>
+            {clientWork.period}
+          </Typography>
+        </Box>
+        <Typography
+          sx={{
+            fontFamily: '"Clash Display",sans-serif',
+            fontWeight: 600,
+            fontSize: { xs: "1.6rem", md: "2rem" },
+            letterSpacing: "-0.03em",
+            color: "#F5F5F5",
+            mb: 1.5,
+          }}
+        >
+          {clientWork.title}
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: '"Satoshi",sans-serif',
+            color: "#A0A0A0",
+            lineHeight: 1.7,
+            fontSize: { xs: "0.95rem", md: "1rem" },
+            maxWidth: 720,
+            mb: 2.5,
+          }}
+        >
+          {clientWork.blurb}
+        </Typography>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2.5 }}>
+          {clientWork.highlights.map((item) => (
+            <Box
+              key={item}
+              sx={{
+                px: 1.25,
+                py: 0.5,
+                border: "1px solid #2E2E2E",
+                borderRadius: 1,
+              }}
+            >
+              <Typography
+                sx={{ ...mono, fontSize: "0.62rem", color: "#808080" }}
+              >
+                {item}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+        <Typography
+          component="a"
+          href="#experience"
+          sx={{
+            ...mono,
+            fontSize: "0.7rem",
+            color: "#3EFFC2",
+            textDecoration: "none",
+            "&:hover": { textDecoration: "underline" },
+          }}
+        >
+          Full freelance log →
+        </Typography>
       </Box>
 
       {!showAll && hiddenProjects.length > 0 && (

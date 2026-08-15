@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const PARTICLE_COUNT = 70;
+const PARTICLE_COUNT_DESKTOP = 70;
+const PARTICLE_COUNT_MOBILE = 36;
 const CONNECTION_DIST = 140;
 const MOUSE_RADIUS = 110;
 const MINT = "62, 255, 194";
@@ -23,7 +24,11 @@ export function NeuralBackground() {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      particlesRef.current = Array.from({ length: PARTICLE_COUNT }, () => ({
+      const count =
+        window.innerWidth < 768
+          ? PARTICLE_COUNT_MOBILE
+          : PARTICLE_COUNT_DESKTOP;
+      particlesRef.current = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.35,

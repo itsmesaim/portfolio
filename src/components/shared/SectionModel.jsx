@@ -52,8 +52,8 @@ export function SectionModel({ path, scale = 1, size = 90, sx = {} }) {
     >
       <Canvas
         camera={{ position: [0, 0.4, 3], fov: 35 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
+        gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
+        dpr={[1, 1.25]}
       >
         <ambientLight intensity={1} />
         <pointLight position={[2, 2, 2]} color={MINT} intensity={2} />

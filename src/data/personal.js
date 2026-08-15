@@ -1,9 +1,9 @@
 export const personal = {
   name: "Saim Kaskar",
-  role: "Full-Stack Developer",
+  role: "Junior Full-Stack Developer",
   tagline:
-    "I build real-time systems, AI-powered products, and full-stack apps that actually get used.",
-  bio: "Building and shipping real-world web applications across a wide range of technologies and industries. Strong frontend foundation in React and TypeScript, with backend depth across Spring Boot, Node.js, FastAPI, and Go. Hands-on with NLP, ML model training, LLM integration, and agentic AI pipelines.",
+    "Junior full-stack. React and Node in production. LangChain, RAG, and agentic workflows are what I'm deep in now.",
+  bio: "Junior full-stack developer. Strongest on React, JavaScript, and Node. I know LLMs well: LangChain in live products (JobRadar, MeetX), RAG, structured output, and LangSmith tracing. Under that sits NLP from the degree: n-grams, regex, NLTK, spaCy, and some TensorFlow. Right now I'm going deep on LangGraph and agentic pipelines. Comfortable taking a feature from UI to API to deploy. Still a junior on the software side. The AI work is the thing I'm studying hardest.",
   location: "Dublin, Ireland",
   email: "saimkaskar1@gmail.com",
   phone: "+353 89 446 3413",
@@ -13,12 +13,6 @@ export const personal = {
     github: "https://github.com/itsmesaim",
     live: "https://meetx.saimjs.com",
   },
-  stats: [
-    { value: "Live", label: "In Production" },
-    { value: "10+", label: "Client Projects" },
-    { value: "2", label: "Degrees" },
-    { value: "MSc", label: "Computing 2025" },
-  ],
   experience: [
     {
       id: "freelance",
@@ -28,7 +22,7 @@ export const personal = {
       period: "2022 – Present",
       current: true,
       highlights: [
-        "Built and delivered 10+ production web apps for real paying clients — billing systems, inventory tools, marketing sites.",
+        "Built and delivered 10+ production web apps for real paying clients: billing systems, inventory tools, marketing sites.",
         "One client's marketing site directly drove 15% of new customer acquisitions in its first period after launch.",
         "Built a live inventory management system for a restaurant group, replacing manual tracking with accurate digital records.",
         "Integrated LLM and ML features into several client projects to automate repetitive user workflows.",

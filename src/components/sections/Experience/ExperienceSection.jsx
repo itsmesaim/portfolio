@@ -144,6 +144,7 @@ export function ExperienceSection() {
 
       <Box sx={{ mb: { xs: 5, md: 7 }, maxWidth: 900 }}>
         <Typography
+          component="h2"
           sx={{
             fontFamily: '"Clash Display",sans-serif',
             fontWeight: 500,

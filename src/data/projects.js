@@ -4,18 +4,18 @@ export const projects = [
     title: "JobRadar AI",
     tagline: "AI-Powered Job Search Copilot",
     description:
-      "Full-stack job hunting platform that crawls listings, rates fit against your CV with an LLM, and tracks applications through a Kanban pipeline.",
+      "Full-stack job-hunting platform that crawls live listings, rates fit against your CV with a calibrated LLM pipeline, and turns strong matches into ATS-screened apply packs, tracked on a Kanban board.",
     images: [
-      "/projects/JobRadarAI-1.png",
-      "/projects/JobRadarAI-2.png",
-      "/projects/JobRadarAI-3.png",
+      "/projects/JobRadarAI-1.webp",
+      "/projects/JobRadarAI-2.webp",
+      "/projects/JobRadarAI-3.webp",
     ],
     problem:
-      "Job hunting means scanning hundreds of listings to find the ones actually worth your time, then losing track of who you applied to and why. I wanted a system that does the filtering for me and tells me honestly where I stand.",
+      "Job hunting means scanning hundreds of listings to find the ones actually worth your time, then losing track of who you applied to and why. Generic skill-overlap scores waste time on categorically wrong roles, and writing a tailored CV for every decent match is its own second job. I wanted a system that filters honestly, remembers my corrections, and drafts the application, not just ranks job titles.",
     whatIBuilt:
-      "A FastAPI + React/TypeScript platform where you upload a CV once, set role and location preferences, and the system crawls Adzuna and Jooble for live postings. Each job is rated 1-10 against your CV using LangChain with structured Pydantic output — returning a score, matched strengths, gaps, and a verdict. A two-stage filter checks for structural mismatches (IC vs management, junior vs senior, domain-as-core-requirement) before scoring skill overlap, so the system doesn't waste your time on categorically wrong roles just because the tech stack overlaps. Every job moves through a Kanban pipeline from New to Offer or Rejected, and a one-click export generates a structured brief for writing cover letters.",
+      "A FastAPI + React/TypeScript app where you upload a CV once (PDF, Word, ODT, text, or LaTeX), set role, location, work-mode, and visa preferences, and the system crawls Jooble and JobsAPI (Indeed) in parallel. Each posting is rated 1-10 against the parsed CV with structured Pydantic output: score, matched strengths, essential vs preferred gaps, a verdict, auto-reject, and tailoring tips. Obvious mismatches never hit the LLM. A cosine-similarity pre-filter scores them cheaply. Surviving JDs are chunked into FAISS so the model reads the relevant parts of long postings instead of a truncated dump. You can star-rate the rating and leave a note; those corrections are retrieved as calibration context the next time a similar job is scored. Strong matches (6+) can generate an apply pack over SSE: a real three-call loop (draft, independent ATS critique, one bounded revision) that rewrites existing CV bullets in Google XYZ format and a structured cover letter, without inventing metrics. Every job moves through a Kanban pipeline from New to Saved to Applied to Interviewing to Offer or Rejected. Freemium quotas, an admin model catalog, GDPR-style data export/delete, and EU-default LLM routing (Mistral) sit underneath.",
     unique:
-      "Provider-agnostic LLM layer — swap between local Ollama/Qwen and OpenAI with one environment variable, with full LangSmith tracing on every call. The rating prompt explicitly separates categorical disqualifiers from gradable skill gaps, catching mismatches like a management role requiring 3+ years leading engineers when the candidate's experience is IC-only.",
+      "Split LLM layer: CV parsing and bulk rating can run on different providers (Ollama, OpenAI, xAI, Mistral, DeepSeek) via env plus a per-user Settings picker, with LangSmith tracing on every call. Embeddings pre-filter, FAISS RAG, and user-calibration form a closed loop so the model gets cheaper, more consistent, and less same-stack-wrong-job. The prompt and hard post-processing separate categorical disqualifiers (IC vs management, junior vs senior, domain-as-core, visa/sponsorship) from gradable skill gaps; 2+ Essential gaps clamp the score to 6. Apply packs are a second pipeline, not a one-shot prompt: an ATS critic that did not write the draft tries to reject it, then a revision pass fixes only what was flagged.",
     stack: [
       "FastAPI",
       "React",
@@ -23,11 +23,14 @@ export const projects = [
       "MongoDB",
       "LangChain",
       "LangSmith",
+      "FAISS",
       "Pydantic",
       "Ollama",
       "OpenAI",
-      "Adzuna API",
+      "Mistral",
+      "xAI",
       "Jooble API",
+      "JobsAPI (Indeed)",
     ],
     live: "https://jobradar.saimjs.com",
     github: "https://github.com/itsmesaim/jobRadarAI",
@@ -36,18 +39,18 @@ export const projects = [
   },
   {
     id: "6g-firewall",
-    title: "AI Firewall — 6G Threat Detection",
+    title: "AI Firewall: 6G Threat Detection",
     tagline: "MSc Dissertation · ML Network Security",
     description:
       "Simulated a smart city 6G network and trained ML models to detect cyber threats in real-time, with a human-in-the-loop review dashboard.",
-    images: ["/projects/6gfirewall-1.png", "/projects/6gfirewall-2.png"],
+    images: ["/projects/6gfirewall-1.webp", "/projects/6gfirewall-2.webp"],
 
     problem:
-      "6G network security is largely uncharted — there are no production playbooks yet. I needed to model real attack vectors and build defences before the infrastructure even exists.",
+      "6G network security is largely uncharted. There are no production playbooks yet. I needed to model real attack vectors and build defences before the infrastructure even exists.",
     whatIBuilt:
       "An NS-3 (C++) simulation of a smart city 6G network with simulated attacks. Multiple ML models were trained and compared for threat classification, with a React dashboard plus WebSocket integration for real-time alerts and human-in-the-loop review.",
     unique:
-      "Modelled a genuine agentic AI system — one that learns and improves from human operator decisions over time. The dashboard isn't just a viewer; it's part of the training loop.",
+      "Modelled a genuine agentic AI system, one that learns and improves from human operator decisions over time. The dashboard isn't just a viewer; it's part of the training loop.",
     stack: [
       "Python",
       "scikit-learn",
@@ -70,18 +73,18 @@ export const projects = [
     description:
       "Production-grade video conferencing with AI-powered transcription, session summaries, and an in-meeting Q&A chatbot.",
     images: [
-      "/projects/meetx-1.png",
-      "/projects/meetx-2.png",
-      "/projects/meetx-3.png",
-      "/projects/meetx-4.png",
-      "/projects/meetx-5.png",
+      "/projects/meetx-1.webp",
+      "/projects/meetx-2.webp",
+      "/projects/meetx-3.webp",
+      "/projects/meetx-4.webp",
+      "/projects/meetx-5.webp",
     ],
     problem:
-      "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in — not bolted on as an afterthought.",
+      "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in, not bolted on as an afterthought.",
     whatIBuilt:
       "A full-stack platform with React/TypeScript on the frontend and Spring Boot (Java) on the backend. WebRTC + LiveKit handle real-time video. LangChain and LangSmith power transcription, AI session summaries, and an in-meeting Q&A chatbot, with every LLM call traced for evaluation.",
     unique:
-      "Every LLM call is observable through LangSmith — most AI features ship as black boxes, mine show their work. Also using a Spring Boot backend instead of the usual Node.js stack, which gives proper thread safety for real-time signalling.",
+      "Every LLM call is observable through LangSmith. Most AI features ship as black boxes; mine show their work. Also using a Spring Boot backend instead of the usual Node.js stack, which gives proper thread safety for real-time signalling.",
     stack: [
       "React",
       "TypeScript",
@@ -105,9 +108,9 @@ export const projects = [
     description:
       "Complete online store rebuild for a real Mumbai clothing shop: Next.js storefront, standalone React admin panel, and an Express/MongoDB API tying together payments, shipping, and email, all deployed on a self-managed VPS.",
     images: [
-      "/projects/MemonClothStore-1.png",
-      "/projects/MemonClothStore-2.png",
-      "/projects/MemonClothStore-3.png",
+      "/projects/MemonClothStore-1.webp",
+      "/projects/MemonClothStore-2.webp",
+      "/projects/MemonClothStore-3.webp",
     ],
     problem:
       "A local clothing store needed to move online, but not with a templated store builder. Products come in multiple colors with independent pricing/stock/photos per variant, customers wanted to know when sold-out items were back, and the owner needed a way to run their own marketing without hiring anyone.",
@@ -141,16 +144,16 @@ export const projects = [
     description:
       "A full-stack health screening app with a React questionnaire frontend and a Flask REST API that runs a scikit-learn model trained on the Pima Indians diabetes dataset.",
     images: [
-      "/projects/diabeto-1.png",
-      "/projects/diabeto-2.png",
-      "/projects/diabeto-3.png",
+      "/projects/diabeto-1.webp",
+      "/projects/diabeto-2.webp",
+      "/projects/diabeto-3.webp",
     ],
     problem:
-      "Most people don't know their clinical diabetes markers — glucose, insulin, skin fold thickness — but early awareness matters. I wanted a tool that asks simple lifestyle questions and still feeds a real ML model, without requiring a lab visit first.",
+      "Most people don't know their clinical diabetes markers (glucose, insulin, skin fold thickness), but early awareness matters. I wanted a tool that asks simple lifestyle questions and still feeds a real ML model, without requiring a lab visit first.",
     whatIBuilt:
       "A React + Flask application with an 8-step wizard that maps everyday answers to Pima dataset features. The Flask API exposes POST /predict, loads a pickled LogisticRegression model, and returns a risk result with tailored prevention guidance. The model was trained on raw clinical features (~70% test accuracy) and the full request path is documented in the README.",
     unique:
-      "Non-medical inputs become clinical features — glucose estimated from meal timing, insulin from post-meal symptoms, skin thickness from physical descriptions — so lay users can drive a real backend ML pipeline. Mobile-first UI with a progress wizard, not a single long form.",
+      "Non-medical inputs become clinical features: glucose estimated from meal timing, insulin from post-meal symptoms, skin thickness from physical descriptions, so lay users can drive a real backend ML pipeline. Mobile-first UI with a progress wizard, not a single long form.",
     stack: [
       "React",
       "Vite",
@@ -174,16 +177,16 @@ export const projects = [
     description:
       "Server-authoritative multiplayer Pong with optional accounts, persistent stats, power-up orbs, and reconnect grace handling. Deployed live at pong.saimjs.com.",
     images: [
-      "/projects/pong-1.png",
-      "/projects/pong-2.png",
-      "/projects/pong-3.png",
-      "/projects/pong-4.png",
-      "/projects/pong-5.png",
+      "/projects/pong-1.webp",
+      "/projects/pong-2.webp",
+      "/projects/pong-3.webp",
+      "/projects/pong-4.webp",
+      "/projects/pong-5.webp",
     ],
     problem:
       "I wanted to properly understand server-authoritative game state not just syncing two clients, but building a system where the server owns the physics, validates all input, and handles the messy real-world stuff like dropped connections mid-game.",
     whatIBuilt:
-      "A shared 60Hz server loop runs physics across all active rooms simultaneously. Swept collision detection prevents fast balls tunneling through paddles. Friend matches pause on disconnect and give the player 10 seconds to reconnect and reclaim their seat via a stable clientId — if they don't return, a walkover is recorded in MongoDB. Power-up orbs spawn mid-rally and apply randomised effects: speed boost with a telegraph warning, curve spin, or opponent paddle shrink. Optional JWT accounts persist win/loss records, match history, and a global leaderboard. AI mode runs client-side and reports results to the same stats pipeline.",
+      "A shared 60Hz server loop runs physics across all active rooms simultaneously. Swept collision detection prevents fast balls tunneling through paddles. Friend matches pause on disconnect and give the player 10 seconds to reconnect and reclaim their seat via a stable clientId. If they don't return, a walkover is recorded in MongoDB. Power-up orbs spawn mid-rally and apply randomised effects: speed boost with a telegraph warning, curve spin, or opponent paddle shrink. Optional JWT accounts persist win/loss records, match history, and a global leaderboard. AI mode runs client-side and reports results to the same stats pipeline.",
     unique:
       "Two visual themes (neon arcade and phosphor green) toggle from the header. The canvas reads CSS variables live so the entire game:  paddles, ball, scores, orbs : recolours instantly. On mobile the board rotates vertical with remapped touch input. Deployed with the API on a separate subdomain under pm2 and the static frontend served directly by Nginx.",
     stack: [
@@ -208,14 +211,14 @@ export const projects = [
     title: "Information Retrieval System",
     tagline: "NLP Pipeline · Vector Space Model",
     description:
-      "Full document retrieval engine built from scratch — TF-IDF matrix, inverted index, cosine similarity ranking, and a complete NLP preprocessing pipeline.",
+      "Full document retrieval engine built from scratch: TF-IDF matrix, inverted index, cosine similarity ranking, and a complete NLP preprocessing pipeline.",
     images: ["/projects/ir-system-1.png"],
     problem:
-      "Most developers use search APIs without understanding how they work. I wanted to build retrieval from first principles so I'd actually own the knowledge — not just call elasticsearch.",
+      "Most developers use search APIs without understanding how they work. I wanted to build retrieval from first principles so I'd actually own the knowledge, not just call elasticsearch.",
     whatIBuilt:
-      "A Python retrieval engine with full NLP preprocessing (tokenization, stopwords, lemmatization via NLTK + spaCy), TF-IDF matrix construction, inverted index, and cosine similarity ranking — all written from scratch with scikit-learn primitives.",
+      "A Python retrieval engine with full NLP preprocessing (tokenization, stopwords, lemmatization via NLTK + spaCy), TF-IDF matrix construction, inverted index, and cosine similarity ranking, all written from scratch with scikit-learn primitives.",
     unique:
-      "No black-box search libraries. Every component — from text cleaning to ranking — was implemented manually, so I can explain and modify every part of the pipeline.",
+      "No black-box search libraries. Every component, from text cleaning to ranking, was implemented manually, so I can explain and modify every part of the pipeline.",
     stack: [
       "Python",
       "scikit-learn",
@@ -254,69 +257,142 @@ export const projects = [
   },
 
   {
-    id: "fastapi-f1",
-    title: "F1 Racing Data Platform",
-    tagline: "FastAPI Backend",
+    id: "f1-stats-manager",
+    title: "F1 Stats Manager",
+    tagline: "MSc Cloud Assignment · Public read, protected write",
     description:
-      "Backend platform for Formula 1 racing data with full REST API, JWT auth, and auto-generated OpenAPI docs.",
-    images: ["/projects/f1-1.png"],
-    problem:
-      "Wanted to properly learn Python backend development — auth flows, structured routing, database modelling — using a domain I actually enjoy (F1).",
-    whatIBuilt:
-      "A FastAPI + SQLite backend serving F1 race data, drivers, and constructor info. JWT auth, Pydantic models, structured routing, and auto-generated OpenAPI documentation.",
-    unique:
-      "Clean Pydantic-first design — every endpoint has full type safety end-to-end, and the OpenAPI docs are good enough to ship as the actual API reference.",
-    stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic", "OpenAPI"],
-    github: "https://github.com/itsmesaim/F1",
-    status: "Fixing",
-  },
-  {
-    id: "task-manager",
-    title: "Task Management API",
-    tagline: "FastAPI Backend",
-    description:
-      "Production-style task management backend with user accounts, task hierarchies, and full CRUD with auth.",
-    images: ["/projects/task-manager-1.png"],
-    problem:
-      "Every task management tool I've used has weird limitations. I wanted to build a backend that handles real edge cases — subtasks, ownership transfers, soft deletes — properly.",
-    whatIBuilt:
-      "A FastAPI + SQLite backend with full user authentication, task CRUD, hierarchical subtasks, and soft-delete recovery. JWT-based auth with refresh tokens and proper role separation.",
-    unique:
-      "Soft delete with recovery window means nothing is ever really lost. Built-in audit trail for every task change.",
-    stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic", "SQLAlchemy"],
-    github: "https://github.com/itsmesaim/task-manager",
-    status: "Rewriting the logics",
-  },
-  {
-    id: "aeroflow",
-    title: "AeroFlow",
-    tagline: "Airport Management System",
-    description:
-      "Full-stack airport operations platform with real-time flight updates, role-based portals for admin, agents, and staff, and a passenger booking flow with QR boarding passes. Built on Node.js, MongoDB, and Socket.IO.",
+      "One of three MSc cloud assignments. Full-stack F1 stats app where guests browse, filter, and compare drivers and teams, while authenticated users manage the database. Built with FastAPI, Firebase Auth, and Cloud Firestore.",
     images: [
-      "/projects/aeroflow-1.png",
-      "/projects/aeroflow-2.png",
-      "/projects/aeroflow-3.png",
+      "/projects/F1-home.webp",
+      "/projects/F1-query-driver.webp",
+      "/projects/F1-driver-detail.webp",
+      "/projects/F1-compare-drivers.webp",
+      "/projects/F1-compare-teams.webp",
+      "/projects/F1-add-driver.webp",
     ],
     problem:
-      "I wanted to build a system with real operational complexity — not another CRUD app, but something with overlapping concerns: live data that multiple roles act on simultaneously, scheduling constraints that can conflict, and a booking pipeline that has to stay consistent from search through to boarding.",
+      "Sports stats apps are often either static pages you can't update, or admin tools with no public browse experience. I wanted one place to store F1 driver and team records, let anyone query and compare them, and only allow writes after a real login. Same guest-vs-editor split you see in real products.",
     whatIBuilt:
-      "Five resource domains — flights, passengers, bookings, boarding, and gates — each with its own controllers, models, and routes. JWT auth gates four distinct roles (admin, agent, staff, public) down to the endpoint level. Socket.IO pushes live flight and boarding updates into role-specific rooms, so a flight board and a staff boarding console stay in sync without polling. The booking flow runs from flight search to seat selection to a QR-coded boarding pass generated on confirmation, with email delivery via nodemailer. An admin analytics endpoint runs MongoDB aggregation pipelines for revenue-by-day, bookings-over-time, top routes, and flight-status distribution, with class-based pricing folded into the revenue math.",
+      "A FastAPI server-rendered app (Jinja2 + dark F1-themed UI) backed by Google Cloud Firestore. Users sign up and log in with Firebase email/password; the client stores the ID token in a cookie, and the server validates it before any create, update, or delete. Guests can still search drivers and teams with numeric filters (<, ==, >) on stats like wins, poles, titles, and age; open detail pages; and compare two drivers or two teams side-by-side. Logged-in users add teams, register drivers against an existing team dropdown, edit stats after a race weekend, and delete bad records. Duplicate names are blocked on write so the registry stays clean.",
     unique:
-      "Gate assignment isn't a dropdown — it checks aircraft-type compatibility against each gate and detects time-window conflicts, marking a gate occupied if another active flight holds it within a two-hour window. The boarding system models a real queue with call, board, and boarded states that staff advance through, broadcasting each transition live to everyone watching that flight.",
+      "Clear permission boundary: public read/query/compare, protected mutations. Enforced both in the UI (Add buttons disabled until login) and on the server (Firebase token verification on every write). Built as a cloud assignment stack end to end: FastAPI routes, Firebase Auth, Firestore CRUD, and App Engine-style deployment readiness, with an F1 domain that makes CRUD feel like managing a real season database rather than todos.",
+    stack: [
+      "FastAPI",
+      "Python",
+      "Jinja2",
+      "Firebase Auth",
+      "Cloud Firestore",
+      "Google Cloud",
+      "HTML/CSS",
+      "JavaScript",
+    ],
+    github: "https://github.com/itsmesaim/F1",
+    status: "coursework",
+    hasImages: true,
+  },
+  {
+    id: "collab-taskboards",
+    title: "Collab TaskBoards",
+    tagline: "MSc Cloud Assignment · Shared boards, owner controls",
+    description:
+      "One of three MSc cloud assignments. Full-stack collaborative task management app where users create boards, assign tasks with due dates, share boards with teammates, and track completion. Built with FastAPI, a server-rendered UI, and Google Cloud Firestore.",
+    images: [
+      "/projects/taskboards-login.webp",
+      "/projects/taskboards-list.webp",
+      "/projects/taskboards-details.webp",
+      "/projects/taskboards-create.webp",
+    ],
+    problem:
+      "Group projects fall apart when to-dos live in chats, notes, and memory. I wanted a single place where a team can own boards, share access, assign work, and see what is done, without a heavy third-party tool.",
+    whatIBuilt:
+      "A FastAPI web app with Jinja2/Bootstrap UI and Firebase email/password authentication. After login, the Firebase ID token is stored in a cookie and verified server-side on every protected route. Users create task boards, add tasks (title, description, due date, multi-assignee), toggle completion with timestamps, and edit or delete work. Board owners can invite other registered users, remove collaborators (including cleaning them off assigned tasks), rename boards, and delete boards only when empty of tasks and shares. Firestore stores users, boards, and tasks with document references for board membership and assignments. The home view merges owned and shared boards so collaborators always see the same workspaces.",
+    unique:
+      "Clear ownership model: only the board owner can manage membership, rename, or delete the board, while owners and shared users can create and update tasks. Delete is gated until tasks and shared users are removed. Duplicate task titles are rejected per board. Unassigned tasks are visually flagged, and completion tracks when work finished. Small product rules that make the collaboration story real, not just CRUD.",
+    stack: [
+      "FastAPI",
+      "Python",
+      "Jinja2",
+      "Bootstrap",
+      "Firebase Authentication",
+      "Google Cloud Firestore",
+      "JavaScript",
+      "Uvicorn",
+    ],
+    github: "https://github.com/itsmesaim/task-management",
+    status: "coursework",
+    hasImages: true,
+  },
+  {
+    id: "postnow-instaclone",
+    title: "PostNow",
+    tagline: "MSc Cloud Assignment · Follow graph, feed, Cloud Storage",
+    description:
+      "One of three MSc cloud assignments. Full-stack Instagram-style mini social network: Firebase Auth login, Firestore users/posts/comments, Cloud Storage for images, and a personalized feed of you plus people you follow. Built with FastAPI, Jinja2, and Google Cloud.",
+    images: [
+      "/projects/postnow-login.webp",
+      "/projects/postnow-feed.webp",
+      "/projects/postnow-profile.webp",
+      "/projects/postnow-create.webp",
+      "/projects/postnow-search.webp",
+      "/projects/postnow-followers.webp",
+    ],
+    problem:
+      "Most todo CRUD demos never touch real product problems: who can see what, how identity works, how media lives outside the DB, and how a feed is built from relationships. I wanted one app that forces those lessons: login, profiles, follow graph, image posts, comments, and a timeline, on a real cloud stack.",
+    whatIBuilt:
+      "A FastAPI server-rendered social app (Jinja2 + Poppins UI) backed by Cloud Firestore and Cloud Storage. Users sign up and log in with Firebase email/password; the client stores the Firebase ID token in a cookie, and the server verifies it before any protected action. Logged-in users get a home feed of their own posts plus posts from people they follow (newest first, capped at 50). They can search users by name, open profiles, follow/unfollow, create image+caption posts (PNG/JPG uploaded to a public GCS bucket), and comment on posts (max 200 chars, first 5 shown with expand for the rest). First login auto-creates a User document with empty followers/following maps.",
+    unique:
+      "Not a public guest browse app. The product is the logged-in social graph. No token means no feed, search, post, follow, or comment. The UI shows login; the server re-checks the cookie on every write. End-to-end GCP assignment shape: FastAPI routes, Firebase Auth, Firestore CRUD plus comment subcollections, Cloud Storage for media, relationship maps for follow, and App Engine-style deploy readiness. Domain feels like a mini Instagram, not a generic form demo.",
+    stack: [
+      "FastAPI",
+      "Python",
+      "Jinja2",
+      "Firebase Auth",
+      "Cloud Firestore",
+      "Cloud Storage",
+      "Google Cloud",
+      "HTML/CSS",
+      "JavaScript",
+    ],
+    github: "https://github.com/itsmesaim/instaClone",
+    status: "coursework",
+    hasImages: true,
+  },
+  {
+    id: "aeroflow-airport",
+    title: "AeroFlow",
+    tagline: "Airport ops: search, book, check-in, board",
+    description:
+      "Full-stack airport management system: JWT role-based login (passenger / staff / admin), flight search and booking with seat maps, QR boarding passes, staff check-in, group boarding queues, gate assignment, and live Socket.io updates. Express, MongoDB, jQuery, and Bootstrap.",
+    images: [
+      "/projects/aeroflow-flights.webp",
+      "/projects/aeroflow-pass.webp",
+      "/projects/aeroflow-checkin.webp",
+      "/projects/aeroflow-boarding.webp",
+      "/projects/aeroflow-gates.webp",
+      "/projects/aeroflow-analytics.webp",
+    ],
+    problem:
+      "Most login-plus-CRUD demos never touch a real operations problem: who can do what, how a ticket becomes a seat, how a gate gets assigned, and how the departure board stays honest when status changes. I wanted one app that forces those lessons: identity, inventory, check-in, boarding, notifications, as a small airport, not a generic form.",
+    whatIBuilt:
+      "An Express + MongoDB airport system with a static jQuery/Bootstrap UI. Users register or log in with email/password; the server hashes passwords with bcrypt and issues a JWT. Passengers search flights, pick a class and seat (layout comes from the aircraft type), create a booking with a 6-character reference, and get a QR boarding pass plus a confirmation email. Staff check passengers in by reference or passport and push them onto a boarding queue by group. Admins create and edit flights (A320, A330, B737, B777, B787, A380), assign compatible gates by terminal, update status, and read 30-day analytics (bookings, revenue, top routes). Socket.io pushes flight and boarding changes to open boards. A complete profile stores phone, passport, DOB, and nationality so booking can auto-fill.",
+    unique:
+      "The product is the whole airport day, not a public browse demo. Guests can search the board. Passengers book and manage tickets. Staff check in and board. Only admins create flights, assign gates, and see revenue. Seat maps, gate compatibility (narrow-body vs wide-body), and the Flight to Booking to Passenger to BoardingQueue chain make the domain feel like a mini airline, not a todo list with airplane icons.",
     stack: [
       "Node.js",
       "Express",
       "MongoDB",
       "Mongoose",
-      "Socket.IO",
       "JWT",
+      "Socket.io",
       "Nodemailer",
-      "QRCode",
+      "jQuery",
+      "Bootstrap",
+      "HTML/CSS",
+      "JavaScript",
     ],
     github: "https://github.com/itsmesaim/AeroFlow",
-    live: "",
-    status: "github",
+    status: "shipped",
+    hasImages: true,
   },
   {
     id: "financial-management",
@@ -330,25 +406,23 @@ export const projects = [
     whatIBuilt:
       "A FastAPI + SQLite backend tracking transactions across categories with monthly aggregates, budget targets, and a clean REST API ready to plug into any frontend.",
     unique:
-      "Schema is designed around how money actually flows — recurring transactions, planned vs actual budgets, and rollover handling for shared expenses.",
+      "Schema is designed around how money actually flows: recurring transactions, planned vs actual budgets, and rollover handling for shared expenses.",
     stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic"],
     github: "https://github.com/itsmesaim/Finaicial-management",
     status: "Research method - grp project",
   },
-  {
-    id: "freelance",
-    title: "10+ Client Projects",
-    tagline: "Freelance · 2022 – Present",
-    description:
-      "Real-world delivery for paying clients: billing systems for restaurants, inventory management tools, marketing sites, and WordPress builds — all deployed and live.",
-    images: ["/projects/freelance-1.png"],
-    problem:
-      "Tutorial projects don't teach you what happens when a real business depends on the code. Started freelancing to learn what 'production' actually means.",
-    whatIBuilt:
-      "Full-stack delivery on 10+ paying projects: React/Node frontends, AWS or VPS deployments with proper SSL and CI/CD, plus LLM integrations for client workflow automation. One client's marketing site directly drove 15% of new customer acquisitions in its launch period.",
-    unique:
-      "Every project shipped to production with real users — billing systems that handle real money, inventory tools that affect real stock counts. No demos, only live systems.",
-    stack: ["React", "Node.js", "AWS", "WordPress", "MySQL", "Docker", "CI/CD"],
-    status: "paid",
-  },
 ];
+
+export const clientWork = {
+  title: "10+ Client Projects",
+  period: "Freelance · 2022 – Present",
+  blurb:
+    "Paid delivery for real businesses alongside the case studies above. Restaurant billing, inventory tools, marketing sites, and WordPress builds. Shipped to production with SSL, hosting, and the messy bits that only show up when someone is actually paying.",
+  highlights: [
+    "Billing systems",
+    "Inventory tools",
+    "Marketing sites",
+    "WordPress",
+    "AWS / VPS",
+  ],
+};

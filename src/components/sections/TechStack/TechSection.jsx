@@ -293,6 +293,7 @@ export function TechSection() {
       {/* Headline */}
       <Box sx={{ mb: { xs: 4, md: 5 } }}>
         <Typography
+          component="h2"
           sx={{
             fontFamily: '"Clash Display",sans-serif',
             fontWeight: 500,

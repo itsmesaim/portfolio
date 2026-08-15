@@ -32,8 +32,6 @@ export const projects = [
     live: "https://jobradar.saimjs.com",
     github: "https://github.com/itsmesaim/jobRadarAI",
     status: "live",
-    featured: true,
-    tier: 1,
     hasImages: true,
   },
   {
@@ -63,8 +61,6 @@ export const projects = [
     ],
     github: "https://github.com/itsmesaim/AI-firewall",
     status: "academic",
-    featured: true,
-    tier: 1,
     hasImages: true,
   },
   {
@@ -100,8 +96,41 @@ export const projects = [
     live: "https://meetx.saimjs.com",
     github: "https://github.com/itsmesaim/meetX",
     status: "in-progress",
-    featured: true,
-    tier: 1,
+    hasImages: true,
+  },
+  {
+    id: "memon-cloth-store",
+    title: "Memon Cloth Store",
+    tagline: "Freelance · Full-Stack E-Commerce for a Family Clothing Business",
+    description:
+      "Complete online store rebuild for a real Mumbai clothing shop: Next.js storefront, standalone React admin panel, and an Express/MongoDB API tying together payments, shipping, and email, all deployed on a self-managed VPS.",
+    images: [
+      "/projects/MemonClothStore-1.png",
+      "/projects/MemonClothStore-2.png",
+      "/projects/MemonClothStore-3.png",
+    ],
+    problem:
+      "A local clothing store needed to move online, but not with a templated store builder. Products come in multiple colors with independent pricing/stock/photos per variant, customers wanted to know when sold-out items were back, and the owner needed a way to run their own marketing without hiring anyone.",
+    whatIBuilt:
+      "A three-app architecture: a Next.js 16 App Router storefront with server actions for auth, orders, and payments; a Vite + React admin panel for inventory, orders, and shipping; and a shared Express + MongoDB API. Products support per-color variants with independent images, stock, and price overrides, editable inline in the admin form rather than through a separate screen. Razorpay handles payments, Shiprocket handles fulfillment with live webhook-driven status updates, and Cloudinary hosts all product imagery. Customers get transactional emails at every order milestone (confirmed, shipped, out for delivery, delivered) plus opt-in back-in-stock alerts on sold-out items. The admin panel includes a marketing email tool with test sends and unsubscribe compliance, and a moderation queue so customer reviews (including photos) are checked before going live.",
+    unique:
+      "On-demand ISR revalidation between the two frontends: a webhook from the API tells the Next.js storefront exactly which cached pages to drop the moment an admin edits a product, so changes go live in seconds instead of waiting for a timed rebuild. Deployed and operated end-to-end on a self-managed CloudPanel VPS, including migrating live production data between MongoDB Atlas and a self-hosted instance with zero downtime.",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Express",
+      "MongoDB",
+      "Vite",
+      "Razorpay",
+      "Shiprocket API",
+      "Cloudinary",
+      "Nodemailer",
+      "Google OAuth",
+    ],
+    live: "https://memonclothstore.com",
+    github: "https://github.com/anaskapadia24/memon-cloth-store",
+    status: "live",
     hasImages: true,
   },
 
@@ -135,8 +164,6 @@ export const projects = [
     live: "https://diabetio.saimjs.com",
     github: "https://github.com/itsmesaim/diabetic_prediction",
     status: "completed",
-    featured: true,
-    tier: 2,
     hasImages: true,
   },
 
@@ -173,8 +200,6 @@ export const projects = [
     github: "https://github.com/itsmesaim/PONG-MERN",
     live: "https://pong.saimjs.com",
     status: "live",
-    featured: false,
-    tier: 2,
     hasImages: true,
   },
 
@@ -203,8 +228,6 @@ export const projects = [
     ],
     github: "https://github.com/itsmesaim/Retrevial_System",
     status: "academic",
-    featured: true,
-    tier: 1,
   },
   {
     id: "cipherhealth",
@@ -228,8 +251,6 @@ export const projects = [
       "Node.js",
     ],
     status: "academic",
-    featured: false,
-    tier: 2,
   },
 
   {
@@ -248,8 +269,6 @@ export const projects = [
     stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic", "OpenAPI"],
     github: "https://github.com/itsmesaim/F1",
     status: "Fixing",
-    featured: false,
-    tier: 2,
   },
   {
     id: "task-manager",
@@ -267,8 +286,6 @@ export const projects = [
     stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic", "SQLAlchemy"],
     github: "https://github.com/itsmesaim/task-manager",
     status: "Rewriting the logics",
-    featured: false,
-    tier: 2,
   },
   {
     id: "aeroflow",
@@ -300,8 +317,6 @@ export const projects = [
     github: "https://github.com/itsmesaim/AeroFlow",
     live: "",
     status: "github",
-    featured: false,
-    tier: 2,
   },
   {
     id: "financial-management",
@@ -319,8 +334,6 @@ export const projects = [
     stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic"],
     github: "https://github.com/itsmesaim/Finaicial-management",
     status: "Research method - grp project",
-    featured: false,
-    tier: 2,
   },
   {
     id: "freelance",
@@ -337,7 +350,5 @@ export const projects = [
       "Every project shipped to production with real users — billing systems that handle real money, inventory tools that affect real stock counts. No demos, only live systems.",
     stack: ["React", "Node.js", "AWS", "WordPress", "MySQL", "Docker", "CI/CD"],
     status: "paid",
-    featured: false,
-    tier: 3,
   },
 ];

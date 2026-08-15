@@ -12,6 +12,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { motion, AnimatePresence } from "motion/react";
 import { STATUS_CONFIG, DEFAULT_STATUS } from "./statusConfig";
+import { MagneticButton } from "@/components/shared/MagneticButton";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
@@ -365,60 +366,64 @@ export function ProjectModal({ project, open, onClose }) {
           }}
         >
           {project.live && (
-            <Box
-              component="a"
-              href={project.live}
-              target="_blank"
-              rel="noopener"
-              sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 1.5,
-                px: 3,
-                py: 1.5,
-                background: "#3EFFC2",
-                color: "#141414",
-                textDecoration: "none",
-                borderRadius: 1,
-                fontFamily: '"Satoshi",sans-serif',
-                fontSize: "0.9rem",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
-                "&:hover": {
-                  background: "#00C896",
-                  transform: "translateY(-1px)",
-                  boxShadow: "0 0 20px rgba(62,255,194,0.4)",
-                },
-              }}
-            >
-              View Live <OpenInNewIcon sx={{ fontSize: 16 }} />
-            </Box>
+            <MagneticButton>
+              <Box
+                component="a"
+                href={project.live}
+                target="_blank"
+                rel="noopener"
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                  px: 3,
+                  py: 1.5,
+                  background: "#3EFFC2",
+                  color: "#141414",
+                  textDecoration: "none",
+                  borderRadius: 1,
+                  fontFamily: '"Satoshi",sans-serif',
+                  fontSize: "0.9rem",
+                  fontWeight: 600,
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    background: "#00C896",
+                    transform: "translateY(-1px)",
+                    boxShadow: "0 0 20px rgba(62,255,194,0.4)",
+                  },
+                }}
+              >
+                View Live <OpenInNewIcon sx={{ fontSize: 16 }} />
+              </Box>
+            </MagneticButton>
           )}
           {project.github && (
-            <Box
-              component="a"
-              href={project.github}
-              target="_blank"
-              rel="noopener"
-              sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 1.5,
-                px: 3,
-                py: 1.5,
-                border: "1px solid #2E2E2E",
-                color: "#F5F5F5",
-                textDecoration: "none",
-                borderRadius: 1,
-                fontFamily: '"Satoshi",sans-serif',
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                transition: "all 0.2s ease",
-                "&:hover": { borderColor: "#3EFFC2", color: "#3EFFC2" },
-              }}
-            >
-              <GitHubIcon sx={{ fontSize: 18 }} /> Source
-            </Box>
+            <MagneticButton>
+              <Box
+                component="a"
+                href={project.github}
+                target="_blank"
+                rel="noopener"
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                  px: 3,
+                  py: 1.5,
+                  border: "1px solid #2E2E2E",
+                  color: "#F5F5F5",
+                  textDecoration: "none",
+                  borderRadius: 1,
+                  fontFamily: '"Satoshi",sans-serif',
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  transition: "all 0.2s ease",
+                  "&:hover": { borderColor: "#3EFFC2", color: "#3EFFC2" },
+                }}
+              >
+                <GitHubIcon sx={{ fontSize: 18 }} /> Source
+              </Box>
+            </MagneticButton>
           )}
         </Box>
       </DialogContent>

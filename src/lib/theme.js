@@ -86,36 +86,6 @@ export const theme = createTheme({
         sizeSmall: { padding: "6px 16px", fontSize: "0.8rem" },
       },
     },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          background: "#1C1C1C",
-          border: "1px solid #2E2E2E",
-          borderRadius: 16,
-          transition: "border-color 0.3s ease, box-shadow 0.3s ease",
-          "&:hover": { borderColor: "rgba(62,255,194,0.3)" },
-        },
-      },
-    },
-    MuiChip: {
-      styleOverrides: {
-        root: {
-          fontFamily: '"Geist Mono", "Courier New", monospace',
-          fontSize: "0.7rem",
-          letterSpacing: "0.04em",
-          background: "#242424",
-          border: "1px solid #2E2E2E",
-          color: "#A0A0A0",
-          height: 26,
-          transition: "all 0.2s ease",
-          "&:hover": {
-            background: "rgba(62,255,194,0.08)",
-            borderColor: "rgba(62,255,194,0.35)",
-            color: "#3EFFC2",
-          },
-        },
-      },
-    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -139,31 +109,6 @@ export const theme = createTheme({
       },
     },
     MuiDivider: { styleOverrides: { root: { borderColor: "#2E2E2E" } } },
-    MuiTabs: {
-      styleOverrides: {
-        root: {
-          "& .MuiTabs-indicator": {
-            backgroundColor: "#3EFFC2",
-            height: 2,
-            borderRadius: 1,
-          },
-        },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: "#606060",
-          fontFamily: '"Satoshi", sans-serif',
-          fontWeight: 500,
-          textTransform: "none",
-          fontSize: "0.9rem",
-          transition: "color 0.2s ease",
-          "&.Mui-selected": { color: "#3EFFC2" },
-          "&:hover": { color: "#A0A0A0" },
-        },
-      },
-    },
     MuiMenuItem: {
       styleOverrides: {
         root: {

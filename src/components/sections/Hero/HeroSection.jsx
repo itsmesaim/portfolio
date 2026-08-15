@@ -1,5 +1,4 @@
 "use client";
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import { HeroText } from "./HeroText";
@@ -36,9 +35,7 @@ export function HeroSection() {
         overflow: "hidden",
       }}
     >
-      <Suspense fallback={<HeroFallback />}>
-        <HeroCanvas />
-      </Suspense>
+      <HeroCanvas />
       <HeroText />
       <ScrollHint />
 

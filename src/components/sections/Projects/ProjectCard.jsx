@@ -14,6 +14,8 @@ const mono = {
 };
 
 const GRADIENTS = {
+  "memon-cloth-store":
+    "linear-gradient(135deg, #0a0e18 0%, #2a2214 50%, #0a0e18 100%)",
   meetx: "linear-gradient(135deg, #0A1628 0%, #1a3a5c 50%, #0A1628 100%)",
   "6g-firewall":
     "linear-gradient(135deg, #1a0a28 0%, #3d1a5c 50%, #1a0a28 100%)",
@@ -146,7 +148,10 @@ export function ProjectCard({ project, index, onClick }) {
   const ref = useRef(null);
   const [hovered, setHovered] = useState(false);
   const [glow, setGlow] = useState({ x: 50, y: 50 });
+  const [imgFailed, setImgFailed] = useState(false);
   const { setState } = useCursorState();
+  const cover = project.images?.[0];
+  const showFallback = !cover || imgFailed;
 
   // case-insensitive status lookup
   const status = STATUS_CONFIG[project.status?.toLowerCase()] ?? DEFAULT_STATUS;
@@ -210,28 +215,30 @@ export function ProjectCard({ project, index, onClick }) {
             background: GRADIENTS[project.id] || GRADIENTS.freelance,
           }}
         >
-          <BlueprintPlaceholder project={project} index={index} />
+          {showFallback && (
+            <BlueprintPlaceholder project={project} index={index} />
+          )}
 
-          <Box
-            component="img"
-            src={project.images?.[0] || ""}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            sx={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 1,
-              transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
-              transform: hovered ? "scale(1.06)" : "scale(1)",
-            }}
-            onError={(e) => {
-              e.target.style.display = "none";
-            }}
-          />
+          {cover && !imgFailed && (
+            <Box
+              component="img"
+              src={cover}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                zIndex: 1,
+                transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+                transform: hovered ? "scale(1.06)" : "scale(1)",
+              }}
+              onError={() => setImgFailed(true)}
+            />
+          )}
 
           <Box
             sx={{

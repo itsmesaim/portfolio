@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import confetti from "canvas-confetti";
 import Box from "@mui/material/Box";
@@ -11,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutlined";
+import { MagneticButton } from "@/components/shared/MagneticButton";
 
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -28,14 +28,11 @@ export function ContactForm() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({ defaultValues: { reason: "role" } });
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
 
-  const onSubmit = async (data) => {
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       setError(
         "Contact form is not configured. Email me directly at saimkaskar1@gmail.com",
@@ -59,7 +56,7 @@ export function ContactForm() {
         EMAILJS_PUBLIC_KEY,
       );
       setSent(true);
-      reset();
+      form.reset();
       confetti({
         particleCount: 90,
         spread: 75,
@@ -104,9 +101,8 @@ export function ContactForm() {
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={onSubmit}
       sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
-      noValidate
     >
       <Box
         sx={{
@@ -115,34 +111,15 @@ export function ContactForm() {
           gap: 2.5,
         }}
       >
-        <TextField
-          fullWidth
-          label="Name"
-          {...register("name", { required: "Name is required" })}
-          error={!!errors.name}
-          helperText={errors.name?.message}
-        />
-        <TextField
-          fullWidth
-          label="Email"
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^\S+@\S+\.\S+$/,
-              message: "Enter a valid email",
-            },
-          })}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
+        <TextField fullWidth required name="name" label="Name" />
+        <TextField fullWidth required name="email" label="Email" type="email" />
       </Box>
       <TextField
         select
         fullWidth
+        name="reason"
         label="What's this about?"
         defaultValue="role"
-        {...register("reason")}
       >
         {REASON_OPTIONS.map((o) => (
           <MenuItem key={o.value} value={o.value}>
@@ -152,12 +129,11 @@ export function ContactForm() {
       </TextField>
       <TextField
         fullWidth
+        required
         multiline
         rows={5}
+        name="message"
         label="Message"
-        {...register("message", { required: "A message helps!" })}
-        error={!!errors.message}
-        helperText={errors.message?.message}
       />
       {error && (
         <Alert
@@ -170,23 +146,25 @@ export function ContactForm() {
           {error}
         </Alert>
       )}
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        size="large"
-        disabled={sending}
-        sx={{ alignSelf: "flex-start", minWidth: 160 }}
-      >
-        {sending ? (
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <CircularProgress size={18} color="inherit" />
-            Sending...
-          </Box>
-        ) : (
-          "Send Message"
-        )}
-      </Button>
+      <MagneticButton>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          disabled={sending}
+          sx={{ minWidth: 160 }}
+        >
+          {sending ? (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <CircularProgress size={18} color="inherit" />
+              Sending...
+            </Box>
+          ) : (
+            "Send Message"
+          )}
+        </Button>
+      </MagneticButton>
     </Box>
   );
 }

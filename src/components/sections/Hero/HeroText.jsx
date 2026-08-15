@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { motion } from "motion/react";
-import { useCursorState } from "@/hooks/useCursorState";
+import { MagneticButton } from "@/components/shared/MagneticButton";
 
 const mono = {
   fontFamily: '"Geist Mono","Courier New",monospace',
@@ -102,12 +102,6 @@ const up = (delay = 0) => ({
 });
 
 export function HeroText() {
-  const { setState } = useCursorState();
-  const cp = {
-    onMouseEnter: () => setState("hover"),
-    onMouseLeave: () => setState("default"),
-  };
-
   return (
     <Box
       sx={{
@@ -223,70 +217,72 @@ export function HeroText() {
               flexWrap: "wrap",
             }}
           >
-            <Box
-              component="a"
-              href="#projects"
-              {...cp}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1.5,
-                textDecoration: "none",
-                cursor: "pointer",
-                "&:hover .arrow": { transform: "translateX(5px)" },
-                "&:hover .label": { color: "#3EFFC2" },
-              }}
-            >
-              <Typography
-                className="label"
-                sx={{
-                  fontFamily: '"Satoshi",sans-serif',
-                  fontSize: { xs: "1rem", md: "1.1rem" },
-                  fontWeight: 500,
-                  color: "#F5F5F5",
-                  borderBottom: "1px solid #3EFFC2",
-                  pb: 0.25,
-                  transition: "color 0.2s ease",
-                }}
-              >
-                See the work
-              </Typography>
+            <MagneticButton>
               <Box
-                className="arrow"
+                component="a"
+                href="#projects"
                 sx={{
-                  color: "#3EFFC2",
-                  fontFamily: '"Geist Mono",monospace',
-                  fontSize: "1.1rem",
-                  transition: "transform 0.25s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  "&:hover .arrow": { transform: "translateX(5px)" },
+                  "&:hover .label": { color: "#3EFFC2" },
                 }}
               >
-                →
+                <Typography
+                  className="label"
+                  sx={{
+                    fontFamily: '"Satoshi",sans-serif',
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                    color: "#F5F5F5",
+                    borderBottom: "1px solid #3EFFC2",
+                    pb: 0.25,
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  See the work
+                </Typography>
+                <Box
+                  className="arrow"
+                  sx={{
+                    color: "#3EFFC2",
+                    fontFamily: '"Geist Mono",monospace',
+                    fontSize: "1.1rem",
+                    transition: "transform 0.25s ease",
+                  }}
+                >
+                  →
+                </Box>
               </Box>
-            </Box>
+            </MagneticButton>
 
-            <Box
-              component="a"
-              href="#contact"
-              {...cp}
-              sx={{
-                textDecoration: "none",
-                cursor: "pointer",
-                "&:hover .label": { color: "#3EFFC2" },
-              }}
-            >
-              <Typography
-                className="label"
+            <MagneticButton>
+              <Box
+                component="a"
+                href="#contact"
                 sx={{
-                  fontFamily: '"Satoshi",sans-serif',
-                  fontSize: { xs: "1rem", md: "1.1rem" },
-                  fontWeight: 500,
-                  color: "#707070",
-                  transition: "color 0.2s ease",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  "&:hover .label": { color: "#3EFFC2" },
                 }}
               >
-                Get in touch
-              </Typography>
-            </Box>
+                <Typography
+                  className="label"
+                  sx={{
+                    fontFamily: '"Satoshi",sans-serif',
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                    fontWeight: 500,
+                    color: "#707070",
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  Get in touch
+                </Typography>
+              </Box>
+            </MagneticButton>
           </Box>
         </motion.div>
       </Box>

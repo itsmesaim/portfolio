@@ -1,11 +1,12 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useCursorState } from "@/hooks/useCursorState";
 import { useIsMobile } from "@/hooks/useMediaQuery";
 
 export function CustomCursor() {
   const isMobile = useIsMobile();
+  const [pressed, setPressed] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const { state } = useCursorState();
@@ -20,14 +21,22 @@ export function CustomCursor() {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
+    const down = () => setPressed(true);
+    const up = () => setPressed(false);
     window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    window.addEventListener("pointerdown", down);
+    window.addEventListener("pointerup", up);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointerup", up);
+    };
   }, [cursorX, cursorY]);
 
   if (isMobile) return null;
 
   const isHover = state === "hover";
-  const isClick = state === "click";
+  const isClick = pressed;
 
   return (
     <>

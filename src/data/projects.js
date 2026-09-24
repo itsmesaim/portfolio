@@ -2,26 +2,29 @@ export const projects = [
   {
     id: "jobradar-ai",
     title: "JobRadar AI",
-    tagline: "AI-Powered Job Search Copilot",
+    tagline: "Agentic Job Search Copilot · LangGraph",
     description:
-      "Full-stack job-hunting platform that crawls live listings, rates fit against your CV with a calibrated LLM pipeline, and turns strong matches into ATS-screened apply packs, tracked on a Kanban board.",
+      "Agentic job-hunting platform built on LangGraph: it crawls live listings and company ATS boards, rates fit against your CV with a calibrated LLM pipeline, and runs a multi-step agent graph (draft, ATS critique, revise, humanize) to turn strong matches into apply packs, with a per-job chat agent and a Kanban tracker.",
     images: [
       "/projects/JobRadarAI-1.webp",
       "/projects/JobRadarAI-2.webp",
       "/projects/JobRadarAI-3.webp",
+      "/projects/JobRadarAI-4.webp",
+      "/projects/JobRadarAI-5.webp",
     ],
     problem:
       "Job hunting means scanning hundreds of listings to find the ones actually worth your time, then losing track of who you applied to and why. Generic skill-overlap scores waste time on categorically wrong roles, and writing a tailored CV for every decent match is its own second job. I wanted a system that filters honestly, remembers my corrections, and drafts the application, not just ranks job titles.",
     whatIBuilt:
-      "A FastAPI + React/TypeScript app where you upload a CV once (PDF, Word, ODT, text, or LaTeX), set role, location, work-mode, and visa preferences, and the system crawls Jooble and JobsAPI (Indeed) in parallel. Each posting is rated 1-10 against the parsed CV with structured Pydantic output: score, matched strengths, essential vs preferred gaps, a verdict, auto-reject, and tailoring tips. Obvious mismatches never hit the LLM. A cosine-similarity pre-filter scores them cheaply. Surviving JDs are chunked into FAISS so the model reads the relevant parts of long postings instead of a truncated dump. You can star-rate the rating and leave a note; those corrections are retrieved as calibration context the next time a similar job is scored. Strong matches (6+) can generate an apply pack over SSE: a real three-call loop (draft, independent ATS critique, one bounded revision) that rewrites existing CV bullets in Google XYZ format and a structured cover letter, without inventing metrics. Every job moves through a Kanban pipeline from New to Saved to Applied to Interviewing to Offer or Rejected. Freemium quotas, an admin model catalog, GDPR-style data export/delete, and EU-default LLM routing (Mistral) sit underneath.",
+      "A FastAPI + React/TypeScript app where you upload a CV once (PDF, Word, ODT, text, or LaTeX), set role, location, work-mode, and visa preferences, and the system crawls Jooble, JobsAPI (Indeed), and company ATS boards (Greenhouse, Lever, Ashby public feeds) in parallel. Each posting is rated 1-10 against the parsed CV with structured Pydantic output: score, matched strengths, essential vs preferred gaps, a verdict, auto-reject, and tailoring tips. Obvious mismatches never hit the LLM. A cosine-similarity pre-filter scores them cheaply. Surviving JDs are chunked into FAISS so the model reads the relevant parts of long postings instead of a truncated dump. You can star-rate the rating and leave a note; those corrections are retrieved as calibration context the next time a similar job is scored. Strong matches (6+) can generate an apply pack over SSE, run as a LangGraph StateGraph: draft, independent ATS critique that tiers each issue (R1/R2/R3) and assigns an owner, one bounded revision only for drafter-owned R1/R2 issues, then a humanize pass. A deterministic integrity check reverts the humanized draft if any bullet, number, or fact drifts. Output is existing CV bullets rewritten in Google XYZ format plus a structured cover letter, compiled to PDF with Tectonic across selectable CV templates, without inventing metrics. Every job gets its own fenced chat: rating Q&A, build or rebuild the pack, draft answers to employer form questions, and propose MASTER CV additions ('add Rust as a skill') as cards you edit and accept before anything is written. Every job moves through a Kanban tracker from New to Saved to Applied to Interviewing to Offer or Rejected. Freemium quotas, an admin model catalog, GDPR-style data export/delete, and EU-default LLM routing (Mistral) sit underneath.",
     unique:
-      "Split LLM layer: CV parsing and bulk rating can run on different providers (Ollama, OpenAI, xAI, Mistral, DeepSeek) via env plus a per-user Settings picker, with LangSmith tracing on every call. Embeddings pre-filter, FAISS RAG, and user-calibration form a closed loop so the model gets cheaper, more consistent, and less same-stack-wrong-job. The prompt and hard post-processing separate categorical disqualifiers (IC vs management, junior vs senior, domain-as-core, visa/sponsorship) from gradable skill gaps; 2+ Essential gaps clamp the score to 6. Apply packs are a second pipeline, not a one-shot prompt: an ATS critic that did not write the draft tries to reject it, then a revision pass fixes only what was flagged.",
+      "Split LLM layer: CV parsing and bulk rating can run on different providers (Ollama, OpenAI, xAI, Mistral, DeepSeek) via env plus a per-user Settings picker, with LangSmith tracing on every call. Embeddings pre-filter, FAISS RAG, and user-calibration form a closed loop so the model gets cheaper, more consistent, and less same-stack-wrong-job. The prompt and hard post-processing separate categorical disqualifiers (IC vs management, junior vs senior, domain-as-core, visa/sponsorship) from gradable skill gaps; 2+ Essential gaps clamp the score to 6. Apply packs are a LangGraph graph, not a one-shot prompt: an ATS critic that did not write the draft tries to reject it, conditional edges route each issue to the reviser, the humanizer, or back to the user as 'Needs your input', and quality flags (Unaudited, Humanizer fallback) persist on the job instead of failing silently.",
     stack: [
       "FastAPI",
       "React",
       "TypeScript",
       "MongoDB",
       "LangChain",
+      "LangGraph",
       "LangSmith",
       "FAISS",
       "Pydantic",
@@ -31,6 +34,8 @@ export const projects = [
       "xAI",
       "Jooble API",
       "JobsAPI (Indeed)",
+      "Greenhouse/Lever/Ashby",
+      "Tectonic (LaTeX)",
     ],
     live: "https://jobradar.saimjs.com",
     github: "https://github.com/itsmesaim/jobRadarAI",
@@ -395,21 +400,32 @@ export const projects = [
     hasImages: true,
   },
   {
-    id: "financial-management",
-    title: "Financial Management App",
-    tagline: "FastAPI Backend",
+    id: "financial-management-system",
+    title: "Financial Management System",
+    tagline: "MSc team assignment · 3 sprints, student company",
     description:
-      "Personal finance backend tracking income, expenses, and budgets with category analytics.",
-    images: ["/projects/financial-1.png"],
+      "Agile team simulation for an MSc module: 8 to 10 students acting as a company, 3 sprints, a personal finance app with transactions, budgets, overspend alerts, and suggestions. FastAPI, Firebase Auth, Firestore, and email 2FA. I worked across design, frontend, and backend, and I was the only one who deployed it to a VPS.",
+    images: [],
     problem:
-      "Wanted a finance tracker that wasn't a spreadsheet or a creepy app that sells data. Built my own backend that I fully own.",
+      "This was not a solo finance app. The brief was to run like a real squad: scrum ceremonies, split design/dev/client roles, and ship through Git branches and PRs. The product problem was scattered transactions and no simple overspend warning. The bigger exercise was the process: sprint planning, a rotating scrum master, a Kanban board, and review discipline across about 30 feature branches. The 'company' was a bunch of students like us, as part of the master's subject, not a commercial client.",
     whatIBuilt:
-      "A FastAPI + SQLite backend tracking transactions across categories with monthly aggregates, budget targets, and a clean REST API ready to plug into any frontend.",
+      "A FastAPI + Jinja2 app on Cloud Firestore, with Firebase email/password auth and a custom SMTP 2FA step (6-digit email code). Flows we shipped: connect a bank account, record transactions with overspend emails, budget analysis and recommendations, customizable alerts, charts and suggestion pages, and user roles. Some backend logic (categorization, predictive insights) is simplified on purpose. The assignment was the team process, not production-depth fintech. My slice was wide: one of two on UI/design, work on templates and FastAPI routes, present at client meetings, and the only person who put the app on a VPS.",
     unique:
-      "Schema is designed around how money actually flows: recurring transactions, planned vs actual budgets, and rollover handling for shared expenses.",
-    stack: ["FastAPI", "Python", "SQLite", "JWT", "Pydantic"],
+      "A process artifact as much as a product one. Three sprints, a new scrum master each time, Kanban, and about 30 feature branches merged into develop through PRs. I was the connective tissue: design, frontend, backend, client discussions, and sole owner of deployment.",
+    stack: [
+      "FastAPI",
+      "Python",
+      "Jinja2",
+      "Firebase Auth",
+      "Cloud Firestore",
+      "SMTP 2FA",
+      "HTML/CSS",
+      "JavaScript",
+      "VPS",
+    ],
     github: "https://github.com/itsmesaim/Finaicial-management",
-    status: "Research method - grp project",
+    status: "coursework",
+    hasImages: false,
   },
 ];
 

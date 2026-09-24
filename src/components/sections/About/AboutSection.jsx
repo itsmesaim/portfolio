@@ -63,7 +63,7 @@ export function AboutSection() {
           mb: { xs: 6, md: 8 },
         }}
       >
-        {/* Photo — compact card */}
+        {/* Photo, compact card */}
         <Box
           sx={{
             width: { xs: 220, md: 280, lg: 320 },
@@ -126,7 +126,7 @@ export function AboutSection() {
         </Box>
 
         <Box>
-          {/* Full bio — not split */}
+          {/* Full bio, not split */}
           <Typography
             sx={{
               fontFamily: '"Satoshi",sans-serif',
@@ -172,9 +172,9 @@ export function AboutSection() {
             >
               JobRadar AI
             </Box>{" "}
-            is the main one right now: LangChain, structured ratings, a FAISS
-            RAG pipeline on Mistral, with DeepSeek or OpenAI if you want. I'm
-            pushing that toward LangGraph and agentic flows next.{" "}
+            is the main one right now: an agentic LangGraph pipeline for apply
+            packs, LangChain structured ratings, and a FAISS RAG pipeline on
+            Mistral, with DeepSeek or OpenAI if you want.{" "}
             <Box
               component="a"
               href={personal.social.live}
@@ -192,7 +192,7 @@ export function AboutSection() {
             is the other, a real-time video platform on WebRTC and LiveKit.
           </Typography>
 
-          {/* Full journey — collapsed by default */}
+          {/* Full journey, collapsed by default */}
           <Box
             component="button"
             onClick={() => setJourneyOpen((v) => !v)}
@@ -269,7 +269,7 @@ BEng finished May 2024. Moved to Dublin that September for the MSc. Kept freelan
           </AnimatePresence>
         </Box>
 
-        {/* Pull-quote — fills the dead space on wide screens, hidden below lg */}
+        {/* Pull-quote, fills the dead space on wide screens, hidden below lg */}
         <Box
           sx={{
             display: { xs: "none", lg: "flex" },

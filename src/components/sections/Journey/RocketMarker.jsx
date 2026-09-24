@@ -7,7 +7,7 @@ import * as THREE from "three";
 const MINT = "#3EFFC2";
 const SCALE = 0.55;
 
-// Model ships nose-up along world Y, standing on a launchpad — a
+// Model ships nose-up along world Y, standing on a launchpad, a
 // Z-axis-only spin can't tip that over, it just spins it in place
 // (still looks "standing" from any angle). Tipping it onto its side
 // needs a rotation around X instead, applied once as a static base
@@ -16,12 +16,12 @@ const SCALE = 0.55;
 const TIP_ROTATION_X = -Math.PI / 2;
 
 // Nose lands pointing backward relative to travel direction after the
-// tip — flip it 180° so it faces forward instead.
+// tip, flip it 180° so it faces forward instead.
 const NOSE_FLIP = Math.PI;
 
 // The glb's own materials: mat23 is baked near-black (0.01,0.01,0.01),
 // which is why it rendered as a black silhouette regardless of
-// lighting — that's the mesh's actual color, not a lighting bug.
+// lighting, that's the mesh's actual color, not a lighting bug.
 // mat5/mat14 are off-palette blue/red. Remap all four to mint/gray so
 // it matches the rest of the site instead of the source asset's colors.
 const MATERIAL_COLORS = {
@@ -38,7 +38,7 @@ function RocketModel({ angle }) {
   const { scene } = useGLTF("/models/rocket.glb");
 
   // Recenter on the model's actual bounding box (computed once) rather
-  // than a hand-measured offset — a fixed offset gets dragged off-axis
+  // than a hand-measured offset, a fixed offset gets dragged off-axis
   // once the parent group starts rotating every frame.
   const centered = useMemo(() => {
     const clone = scene.clone(true);
@@ -58,7 +58,7 @@ function RocketModel({ angle }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    // Live path-direction spin stays on Z — that's the screen plane
+    // Live path-direction spin stays on Z, that's the screen plane
     // the 2D path lives in.
     groupRef.current.rotation.z = -(angle * Math.PI) / 180 + NOSE_FLIP;
     groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 2) * 0.05;
@@ -78,7 +78,7 @@ export function RocketMarker({ angle = 0, size = 96 }) {
     <Canvas
       // Camera sits (almost) dead-on along Z, the same axis the rocket
       // spins around. An oblique camera made the model foreshorten into
-      // a thin sliver at some path angles — this keeps it full-size and
+      // a thin sliver at some path angles, this keeps it full-size and
       // consistent at every rotation.
       camera={{ position: [0, 0.35, 2.5], fov: 50 }}
       gl={{ antialias: true, alpha: true }}

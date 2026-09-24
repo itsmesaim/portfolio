@@ -68,7 +68,7 @@ export function JourneySection() {
     if (!path) return;
     const point = path.getPointAtLength(len);
     const ahead = path.getPointAtLength(Math.min(len + 1, pathLength.current));
-    // Tangent always points in the curve's 2020->2026 direction — flip
+    // Tangent always points in the curve's 2020->2026 direction, flip
     // it 180° when actually travelling backward (prev button) so the
     // nose faces the way it's really moving instead of flying tail-first.
     const angle =
@@ -235,7 +235,7 @@ export function JourneySection() {
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={() => setActiveIndex(i)}
                   />
-                  {/* Craters — low-poly asteroid texture */}
+                  {/* Craters, low-poly asteroid texture */}
                   <ellipse
                     cx={w.pos[0] + Math.cos(craterAngle) * w.radius * 0.35}
                     cy={w.pos[1] + Math.sin(craterAngle) * w.radius * 0.35}
@@ -300,7 +300,7 @@ export function JourneySection() {
             })}
           </Box>
 
-          {/* Rocket marker — real 3D model, tweens between waypoints */}
+          {/* Rocket marker, real 3D model, tweens between waypoints */}
           <Box
             sx={{
               position: "absolute",

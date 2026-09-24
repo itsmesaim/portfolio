@@ -43,7 +43,7 @@ export function AvatarModel({ position = [0, -1.4, 0] }) {
           wave.fadeOut(0.3);
           dance.reset().setLoop(THREE.LoopOnce, 1);
           dance.clampWhenFinished = true;
-          // Full-speed clip reads as frantic on this rig — slow it down.
+          // Full-speed clip reads as frantic on this rig, slow it down.
           dance.timeScale = 0.55;
           dance.fadeIn(0.3).play();
 

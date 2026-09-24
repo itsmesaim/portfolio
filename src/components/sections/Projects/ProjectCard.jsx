@@ -31,7 +31,7 @@ const GRADIENTS = {
     "linear-gradient(135deg, #0a1028 0%, #1a3a7c 50%, #0a1028 100%)",
   "aeroflow-airport":
     "linear-gradient(135deg, #0A1628 0%, #1a3a5c 50%, #0A1628 100%)",
-  "financial-management":
+  "financial-management-system":
     "linear-gradient(135deg, #0a280f 0%, #1a5c2a 50%, #0a280f 100%)",
   freelance: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
 };
@@ -302,7 +302,7 @@ export function ProjectCard({ project, index, onClick }) {
         <Box sx={{ order: { xs: 2, md: isAlt ? 1 : 2 } }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              {/* flat square — no blink, no glow */}
+              {/* flat square, no blink, no glow */}
               <Box
                 sx={{
                   width: 6,

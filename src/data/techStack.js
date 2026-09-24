@@ -175,7 +175,7 @@ export const techCategories = [
     label: "AI & ML",
     key: "aiml",
     summary:
-      "NLP and classical ML from the degree. LLMs in shipped apps. LangGraph is what I'm studying now.",
+      "NLP and classical ML from the degree. LLMs in shipped apps, including a LangGraph agent pipeline in JobRadar.",
     items: [
       {
         name: "OpenAI SDK",
@@ -299,7 +299,7 @@ export const techCategories = [
       {
         name: "LangGraph",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        level: "Learning",
+        level: "Working",
         years: "<1y",
         score: 52,
       },

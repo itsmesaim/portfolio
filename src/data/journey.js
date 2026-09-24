@@ -91,9 +91,9 @@ export const journeyWaypoints = [
     pos: [1150, 75],
     radius: 36,
     current: true,
-    hover: "LangChain in production. LangGraph next.",
-    title: "LangChain in production. LangGraph next.",
-    text: "Agentic AI is what I'm studying hardest. JobRadar AI is live: LangChain, structured output, a FAISS RAG pipeline on Mistral by default. MeetX traces LLM calls in LangSmith. Right now I'm going deeper on LangGraph and multi-step agents. Still applying. Still figuring out where this lands.",
+    hover: "LangChain and LangGraph in production.",
+    title: "LangChain and LangGraph in production.",
+    text: "Agentic AI is what I'm studying hardest. JobRadar AI is live: LangChain, structured output, a FAISS RAG pipeline on Mistral by default, and now a LangGraph agent graph that drafts, ATS-critiques, revises, and humanizes each apply pack. MeetX traces LLM calls in LangSmith. Next is going deeper on multi-agent setups. Still applying. Still figuring out where this lands.",
     tags: ["LangChain", "LangGraph", "RAG", "LangSmith"],
   },
 ];

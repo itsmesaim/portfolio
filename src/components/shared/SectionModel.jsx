@@ -33,7 +33,7 @@ function Model({ path, scale }) {
   );
 }
 
-// One small, subtle decorative model tucked into a section corner —
+// One small, subtle decorative model tucked into a section corner,
 // idle float only, no drift, no scroll-jacking. Skipped on mobile.
 export function SectionModel({ path, scale = 1, size = 90, sx = {} }) {
   const isMobile = useIsMobile();

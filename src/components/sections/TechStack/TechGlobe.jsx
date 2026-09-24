@@ -105,7 +105,7 @@ function OverviewSun({ position, label, onClick, index }) {
       {/* Point light */}
       <pointLight intensity={1.6} distance={3.5} color="#3EFFC2" decay={2} />
 
-      {/* Label — always visible */}
+      {/* Label, always visible */}
       <Html center distanceFactor={10} style={{ pointerEvents: "none" }}>
         <div
           style={{
@@ -183,7 +183,7 @@ function DetailPlanet({ data }) {
 
   return (
     <group ref={groupRef}>
-      {/* Glowing orb behind logo — catches Bloom */}
+      {/* Glowing orb behind logo, catches Bloom */}
       <mesh>
         <sphereGeometry args={[0.14, 16, 16]} />
         <meshStandardMaterial
@@ -195,7 +195,7 @@ function DetailPlanet({ data }) {
         />
       </mesh>
 
-      {/* Glow ring — also blooms */}
+      {/* Glow ring, also blooms */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.18, 0.28, 32]} />
         <meshBasicMaterial

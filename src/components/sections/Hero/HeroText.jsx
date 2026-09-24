@@ -116,7 +116,7 @@ export function HeroText() {
         pb: { xs: 6, md: 8 },
       }}
     >
-      {/* Section indicator — top left */}
+      {/* Section indicator, top left */}
       <Box
         sx={{
           position: "absolute",
@@ -135,7 +135,7 @@ export function HeroText() {
         </motion.div>
       </Box>
 
-      {/* Right metadata — desktop only */}
+      {/* Right metadata, desktop only */}
       <Box
         sx={{
           position: "absolute",
@@ -206,12 +206,12 @@ export function HeroText() {
               Fighting AI with AI.
             </Box>{" "}
             <Box component="span" sx={{ color: "#707070", fontWeight: 400 }}>
-              Junior full-stack in Dublin. LangChain shipped. LangGraph next.
+              Junior full-stack in Dublin. LangChain and LangGraph shipped.
             </Box>
           </Typography>
         </motion.div>
 
-        {/* CTAs — simple, no repetition */}
+        {/* CTAs, simple, no repetition */}
         <motion.div {...up(1.4)}>
           <Box
             sx={{

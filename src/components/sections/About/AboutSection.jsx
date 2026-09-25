@@ -172,9 +172,9 @@ export function AboutSection() {
             >
               JobRadar AI
             </Box>{" "}
-            is the main one right now: an agentic LangGraph pipeline for apply
-            packs, LangChain structured ratings, and a FAISS RAG pipeline on
-            Mistral, with DeepSeek or OpenAI if you want.{" "}
+            is the main one right now. It rates job listings against your CV and
+            drafts the application, using LangChain, LangGraph, and a FAISS
+            index, on Mistral by default.{" "}
             <Box
               component="a"
               href={personal.social.live}
@@ -189,7 +189,7 @@ export function AboutSection() {
             >
               MeetX
             </Box>{" "}
-            is the other, a real-time video platform on WebRTC and LiveKit.
+            is the other, a video call app built on WebRTC and LiveKit.
           </Typography>
 
           {/* Full journey, collapsed by default */}

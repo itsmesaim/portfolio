@@ -4,7 +4,7 @@ export const projects = [
     title: "JobRadar AI",
     tagline: "Agentic Job Search Copilot · LangGraph",
     description:
-      "Agentic job-hunting platform built on LangGraph: it crawls live listings and company ATS boards, rates fit against your CV with a calibrated LLM pipeline, and runs a multi-step agent graph (draft, ATS critique, revise, humanize) to turn strong matches into apply packs, with a per-job chat agent and a Kanban tracker.",
+      "A job search tool. It pulls live listings and company job boards, rates each one against your CV, and drafts a tailored CV and cover letter for the good matches. Each job also has its own chat and a Kanban tracker.",
     images: [
       "/projects/JobRadarAI-1.webp",
       "/projects/JobRadarAI-2.webp",
@@ -13,11 +13,11 @@ export const projects = [
       "/projects/JobRadarAI-5.webp",
     ],
     problem:
-      "Job hunting means scanning hundreds of listings to find the ones actually worth your time, then losing track of who you applied to and why. Generic skill-overlap scores waste time on categorically wrong roles, and writing a tailored CV for every decent match is its own second job. I wanted a system that filters honestly, remembers my corrections, and drafts the application, not just ranks job titles.",
+      "I was scrolling through hundreds of listings, then forgetting where I'd applied. Keyword-overlap scores kept pushing me toward roles that were clearly wrong, and tailoring a CV for each decent one took as long as finding it. I wanted something that filters honestly, learns from my corrections, and writes the first draft.",
     whatIBuilt:
       "A FastAPI + React/TypeScript app where you upload a CV once (PDF, Word, ODT, text, or LaTeX), set role, location, work-mode, and visa preferences, and the system crawls Jooble, JobsAPI (Indeed), and company ATS boards (Greenhouse, Lever, Ashby public feeds) in parallel. Each posting is rated 1-10 against the parsed CV with structured Pydantic output: score, matched strengths, essential vs preferred gaps, a verdict, auto-reject, and tailoring tips. Obvious mismatches never hit the LLM. A cosine-similarity pre-filter scores them cheaply. Surviving JDs are chunked into FAISS so the model reads the relevant parts of long postings instead of a truncated dump. You can star-rate the rating and leave a note; those corrections are retrieved as calibration context the next time a similar job is scored. Strong matches (6+) can generate an apply pack over SSE, run as a LangGraph StateGraph: draft, independent ATS critique that tiers each issue (R1/R2/R3) and assigns an owner, one bounded revision only for drafter-owned R1/R2 issues, then a humanize pass. A deterministic integrity check reverts the humanized draft if any bullet, number, or fact drifts. Output is existing CV bullets rewritten in Google XYZ format plus a structured cover letter, compiled to PDF with Tectonic across selectable CV templates, without inventing metrics. Every job gets its own fenced chat: rating Q&A, build or rebuild the pack, draft answers to employer form questions, and propose MASTER CV additions ('add Rust as a skill') as cards you edit and accept before anything is written. Every job moves through a Kanban tracker from New to Saved to Applied to Interviewing to Offer or Rejected. Freemium quotas, an admin model catalog, GDPR-style data export/delete, and EU-default LLM routing (Mistral) sit underneath.",
     unique:
-      "Split LLM layer: CV parsing and bulk rating can run on different providers (Ollama, OpenAI, xAI, Mistral, DeepSeek) via env plus a per-user Settings picker, with LangSmith tracing on every call. Embeddings pre-filter, FAISS RAG, and user-calibration form a closed loop so the model gets cheaper, more consistent, and less same-stack-wrong-job. The prompt and hard post-processing separate categorical disqualifiers (IC vs management, junior vs senior, domain-as-core, visa/sponsorship) from gradable skill gaps; 2+ Essential gaps clamp the score to 6. Apply packs are a LangGraph graph, not a one-shot prompt: an ATS critic that did not write the draft tries to reject it, conditional edges route each issue to the reviser, the humanizer, or back to the user as 'Needs your input', and quality flags (Unaudited, Humanizer fallback) persist on the job instead of failing silently.",
+      "CV parsing and bulk rating can use different LLM providers (Ollama, OpenAI, xAI, Mistral, DeepSeek), picked per user in Settings, and LangSmith traces every call. Cheap embeddings drop obvious mismatches before the LLM sees them, and your star ratings feed back in as context for similar jobs. Hard disqualifiers (management vs IC, senior vs junior, visa sponsorship) are separate from skill gaps, and two or more essential gaps cap the score at 6. The apply pack runs as a LangGraph flow where a second pass that didn't write the draft tries to pick holes in it. Issues go to the reviser, the humanizer, or back to you as 'Needs your input', and anything unresolved is flagged on the job instead of hidden.",
     stack: [
       "FastAPI",
       "React",
@@ -76,7 +76,7 @@ export const projects = [
     title: "MeetX",
     tagline: "Real-Time Video Platform with AI",
     description:
-      "Production-grade video conferencing with AI-powered transcription, session summaries, and an in-meeting Q&A chatbot.",
+      "A video conferencing app with transcription, session summaries, and a Q&A chatbot you can use during the call.",
     images: [
       "/projects/meetx-1.webp",
       "/projects/meetx-2.webp",
@@ -85,11 +85,11 @@ export const projects = [
       "/projects/meetx-5.webp",
     ],
     problem:
-      "Most open-source video conferencing tools feel either basic or bloated. I wanted to push WebRTC beyond tutorials and build something with AI baked in, not bolted on as an afterthought.",
+      "Most open-source video tools I tried were either bare-bones or bloated. I wanted to take WebRTC past the tutorial stage and build the AI parts in from the start.",
     whatIBuilt:
       "A full-stack platform with React/TypeScript on the frontend and Spring Boot (Java) on the backend. WebRTC + LiveKit handle real-time video. LangChain and LangSmith power transcription, AI session summaries, and an in-meeting Q&A chatbot, with every LLM call traced for evaluation.",
     unique:
-      "Every LLM call is observable through LangSmith. Most AI features ship as black boxes; mine show their work. Also using a Spring Boot backend instead of the usual Node.js stack, which gives proper thread safety for real-time signalling.",
+      "Every LLM call is traced in LangSmith, so I can see what the model was given and what it returned. The backend is Spring Boot rather than Node, mainly for its thread handling in real-time signalling.",
     stack: [
       "React",
       "TypeScript",
@@ -154,11 +154,11 @@ export const projects = [
       "/projects/diabeto-3.webp",
     ],
     problem:
-      "Most people don't know their clinical diabetes markers (glucose, insulin, skin fold thickness), but early awareness matters. I wanted a tool that asks simple lifestyle questions and still feeds a real ML model, without requiring a lab visit first.",
+      "Most people don't know their glucose, insulin, or skin fold thickness, but early awareness matters. I wanted a tool that asks everyday lifestyle questions and still feeds a real model, with no lab visit first.",
     whatIBuilt:
       "A React + Flask application with an 8-step wizard that maps everyday answers to Pima dataset features. The Flask API exposes POST /predict, loads a pickled LogisticRegression model, and returns a risk result with tailored prevention guidance. The model was trained on raw clinical features (~70% test accuracy) and the full request path is documented in the README.",
     unique:
-      "Non-medical inputs become clinical features: glucose estimated from meal timing, insulin from post-meal symptoms, skin thickness from physical descriptions, so lay users can drive a real backend ML pipeline. Mobile-first UI with a progress wizard, not a single long form.",
+      "Everyday answers get mapped to clinical features: glucose estimated from meal timing, insulin from post-meal symptoms, skin thickness from physical descriptions. The UI is a mobile-first step-by-step wizard instead of one long form.",
     stack: [
       "React",
       "Vite",
@@ -223,7 +223,7 @@ export const projects = [
     whatIBuilt:
       "A Python retrieval engine with full NLP preprocessing (tokenization, stopwords, lemmatization via NLTK + spaCy), TF-IDF matrix construction, inverted index, and cosine similarity ranking, all written from scratch with scikit-learn primitives.",
     unique:
-      "No black-box search libraries. Every component, from text cleaning to ranking, was implemented manually, so I can explain and modify every part of the pipeline.",
+      "No search libraries. I wrote every stage myself, from text cleaning to ranking, so I can explain and change any part of it.",
     stack: [
       "Python",
       "scikit-learn",
@@ -249,7 +249,7 @@ export const projects = [
     whatIBuilt:
       "A full Angular frontend for patient registration, appointment booking, and medical records, integrated with Ethereum via Ganache. All record changes are written to the blockchain as immutable transactions tied to wallet addresses.",
     unique:
-      "Most blockchain healthcare projects are slide decks. This was a working prototype where clinical staff could navigate without training and every record change had a cryptographic audit trail.",
+      "It's a working prototype, not a slide deck. Staff could use it without training, and every record change left an audit trail on the chain.",
     stack: [
       "Angular",
       "Ethereum",

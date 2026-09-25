@@ -2,8 +2,8 @@ export const personal = {
   name: "Saim Kaskar",
   role: "Junior Full-Stack Developer",
   tagline:
-    "Junior full-stack. React and Node in production. LangChain, RAG, and agentic workflows are what I'm deep in now.",
-  bio: "Junior full-stack developer. Strongest on React, JavaScript, and Node. I know LLMs well: LangChain in live products (JobRadar, MeetX), LangGraph agent pipelines (JobRadar), RAG, structured output, and LangSmith tracing. Under that sits NLP from the degree: n-grams, regex, NLTK, spaCy, and some TensorFlow. Comfortable taking a feature from UI to API to deploy. Still a junior on the software side. The AI work is the thing I'm studying hardest.",
+    "Junior full-stack developer. I build with React and Node, and lately a lot of LLM work.",
+  bio: "I'm a junior full-stack developer, strongest on React, JavaScript, and Node. I can take a feature from the UI to the API to a deployed server. I've used LangChain and LangGraph in JobRadar and MeetX, so I know my way around RAG, structured output, and tracing. The NLP underneath comes from my degree: n-grams, regex, NLTK, spaCy, a bit of TensorFlow. I'm still early on the software side. The AI work is what I'm reading and building the most right now.",
   location: "Dublin, Ireland",
   email: "saimkaskar1@gmail.com",
   phone: "+353 89 446 3413",

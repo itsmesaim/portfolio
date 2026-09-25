@@ -175,7 +175,7 @@ export const techCategories = [
     label: "AI & ML",
     key: "aiml",
     summary:
-      "NLP and classical ML from the degree. LLMs in shipped apps, including a LangGraph agent pipeline in JobRadar.",
+      "NLP and classical ML from the degree, plus LLM features in JobRadar and MeetX.",
     items: [
       {
         name: "OpenAI SDK",

@@ -206,7 +206,7 @@ export function HeroText() {
               Fighting AI with AI.
             </Box>{" "}
             <Box component="span" sx={{ color: "#707070", fontWeight: 400 }}>
-              Junior full-stack in Dublin. LangChain and LangGraph shipped.
+              Junior full-stack developer in Dublin.
             </Box>
           </Typography>
         </motion.div>

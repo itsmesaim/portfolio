@@ -5,7 +5,7 @@ import { Providers } from "./Providers";
 const SITE_URL = "https://saimjs.com";
 const TITLE = "Saim Kaskar | Junior Full-Stack Developer in Dublin";
 const DESCRIPTION =
-  "Junior full-stack developer in Dublin. I ship React and Node apps, and build agentic AI with LangChain and LangGraph in production. MSc Computing, Griffith College. Open to work.";
+  "Junior full-stack developer in Dublin. I build React and Node apps and have worked with LangChain and LangGraph. MSc Computing, Griffith College. Open to work.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
